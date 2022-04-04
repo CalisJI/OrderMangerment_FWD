@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationFileConfig\ApplicationFileCongfig.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="OrderObject\BangBaoGia.cs" />
     <Compile Include="OrderObject\DanhSachDonHang.cs" />

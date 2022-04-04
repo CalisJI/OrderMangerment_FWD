@@ -21,3 +21,6 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.CopyComplete
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.exe
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\MainView.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\MainView.baml
