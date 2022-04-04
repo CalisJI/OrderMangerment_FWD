@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:OrderManagerment_WPF"
         mc:Ignorable="d"
         xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
+        
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ContentControl Content="{Binding }">
+    <Grid DataContext="{StaticResource MainViewModel}">
+        <ContentControl Content="{Binding SelectedViewModel}">
 
         </ContentControl>
-        <Button>
-            
-        </Button>
+       
     </Grid>
 </Window>
