@@ -9,7 +9,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ContentControl Content="{Binding }">
-            
+
         </ContentControl>
+        <Button>
+            
+        </Button>
     </Grid>
 </Window>
