@@ -1,0 +1,17 @@
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\OrderManagerment_WPF.exe.config
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\OrderManagerment_WPF.exe
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\OrderManagerment_WPF.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\MainResource\MainResource.baml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\MainWindow.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\App.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF_MarkupCompile.cache
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF_MarkupCompile.lref
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\App.baml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\MainWindow.baml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.g.resources
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.Properties.Resources.resources
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.GenerateResource.cache
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.CoreCompileInputs.cache
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.exe
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.pdb
