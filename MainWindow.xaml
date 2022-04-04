@@ -8,6 +8,8 @@
         xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ContentControl Content="{Binding }">
+            
+        </ContentControl>
     </Grid>
 </Window>
