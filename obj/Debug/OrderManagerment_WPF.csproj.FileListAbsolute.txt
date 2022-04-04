@@ -15,3 +15,9 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.CoreCompileInputs.cache
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.exe
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\MaterialDesignColors.dll
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\MaterialDesignThemes.Wpf.dll
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\MaterialDesignColors.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\MaterialDesignThemes.Wpf.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\MaterialDesignThemes.Wpf.xml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.CopyComplete
