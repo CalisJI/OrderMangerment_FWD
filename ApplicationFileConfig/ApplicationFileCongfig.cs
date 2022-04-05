@@ -48,8 +48,8 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                 {
                     T generic = (T)Activator.CreateInstance(typeof(T));
 
-
-                    ////
+                    //
+                    
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
                     Stream stream = new FileStream(Create_MapFile(Mapping_path), FileMode.Create);
                     using (XmlWriter xmlwriter = new XmlTextWriter(stream, Encoding.UTF8))
