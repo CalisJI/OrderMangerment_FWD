@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using System.Windows.Input;
 
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+=======
+>>>>>>> parent of da897f1 (datagrid Pennding)
 using OrderManagerment_WPF.ApplicationFileConfig;
 using OrderManagerment_WPF.OrderObject;
 
@@ -27,6 +30,7 @@ namespace OrderManagerment_WPF.ViewModel
         public ObservableCollection<DanhSachDonHang> DanhSachDonHangs
         {
             get 
+<<<<<<< HEAD
             {
                 return _danhSachDonHangs;
             }
@@ -45,6 +49,14 @@ namespace OrderManagerment_WPF.ViewModel
             set
             {
                 SetProperty(ref _BangBaoGias, value, nameof(BangBaoGias));
+=======
+            {
+                return _danhSachDonHangs;
+            }
+            set 
+            {
+                SetProperty(ref _danhSachDonHangs, value, nameof(DanhSachDonHangs));
+>>>>>>> parent of da897f1 (datagrid Pennding)
             }
         }
         #region Innitial
@@ -138,11 +150,15 @@ namespace OrderManagerment_WPF.ViewModel
             GetData();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+<<<<<<< HEAD
             BangBaoGia= new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 mainViewModel.SelectedViewModel = BangBaoGia_ViewModel;
             });
 
+=======
+            
+>>>>>>> parent of da897f1 (datagrid Pennding)
         }
     }
 }

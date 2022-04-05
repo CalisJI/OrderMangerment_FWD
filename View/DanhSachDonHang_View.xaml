@@ -20,6 +20,7 @@
                         Width="500"
                         Height="500"
                         ItemsSource="{Binding MuttiTableBangBaoGia}">
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -89,10 +90,22 @@
     
 >>>>>>> da897f1765c1631ff750e3f71dcc242fe9b22b94
 =======
+=======
+
+                        </DataGrid>
+                    </ScrollViewer>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+>>>>>>> parent of da897f1 (datagrid Pennding)
        
         <Button Grid.Column="1" Height="100">
             
         </Button>
     </Grid>
+<<<<<<< HEAD
+>>>>>>> parent of da897f1 (datagrid Pennding)
+=======
 >>>>>>> parent of da897f1 (datagrid Pennding)
 </UserControl>
