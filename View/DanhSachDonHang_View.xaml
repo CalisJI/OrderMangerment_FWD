@@ -5,22 +5,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrderManagerment_WPF.View"
              mc:Ignorable="d" 
+             xmlns:EnumConvert="clr-namespace:OrderManagerment_WPF.ViewModel"
+             xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{StaticResource MainViewModel}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0.15*"/>
-        </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding DanhSachDonHangs}" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <DataGrid 
-                        Width="500"
-                        Height="500"
-                        ItemsSource="{Binding MuttiTableBangBaoGia}">
+             d:DesignHeight="1000" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <ColorConver:GridRowColor x:Key="GridSetColor"/>
+        <EnumConvert:EnumToString x:Key="EnumToString"/>
+    </UserControl.Resources>
+    <Viewbox>
+        <Grid Width="1920"
+            DataContext="{StaticResource MainViewModel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid 
+                Height="1000"
+                Width="1650"
+                HorizontalAlignment="Left"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding DanhSachDonHangs}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding Customer}"
+                     
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="Tên Khách Hàng"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn
+                       Binding="{Binding Note}"
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="Đơn Hàng"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn
+                       Binding="{Binding InputDay, StringFormat=dd/MM/yyyy}"
+                        
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="Ngày Yêu Cầu"/>
+                        </DataGridTextColumn.Header>
 
+<<<<<<< HEAD
                         </DataGrid>
                     </ScrollViewer>
                     
@@ -34,4 +76,53 @@
             
         </Button>
     </Grid>
+=======
+                    </DataGridTextColumn>
+                    <DataGridTextColumn
+                       Binding="{Binding Stage, Converter={StaticResource EnumToString}}"
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="Trạng Thái"/>
+                        </DataGridTextColumn.Header>
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn
+                       Binding="{Binding Alarm, Converter={StaticResource EnumToString}}"
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="Deadline"/>
+                        </DataGridTextColumn.Header>
+
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+
+                <DataGrid.RowStyle >
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{Binding Stage, Converter={StaticResource GridSetColor}}"/>
+                            </Setter.Value>
+                        </Setter>
+
+                    </Style>
+
+                </DataGrid.RowStyle>
+
+            </DataGrid>
+            <Button Grid.Column="1">
+                
+            </Button>
+           
+        </Grid>
+    </Viewbox>
+    
+>>>>>>> da897f1765c1631ff750e3f71dcc242fe9b22b94
 </UserControl>

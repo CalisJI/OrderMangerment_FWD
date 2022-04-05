@@ -1,8 +1,16 @@
 ﻿
+<<<<<<< HEAD
 FF:\Cong_Viec\New folder\App.xaml;;
 FF:\Cong_Viec\New folder\MainWindow.xaml;;
 FF:\Cong_Viec\New folder\MainResource\MainResource.xaml;;
 FF:\Cong_Viec\New folder\View\BangBaoGiaView.xaml;;
 FF:\Cong_Viec\New folder\View\DanhSachDonHang_View.xaml;;
 FF:\Cong_Viec\New folder\View\MainView.xaml;;
+=======
+FF:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\App.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\MainWindow.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\MainResource\MainResource.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\View\DanhSachDonHang_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\View\MainView.xaml;;
+>>>>>>> da897f1765c1631ff750e3f71dcc242fe9b22b94
 
