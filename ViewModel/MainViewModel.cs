@@ -5,14 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using System.Windows.Input;
 
-=======
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
->>>>>>> da897f1765c1631ff750e3f71dcc242fe9b22b94
 using OrderManagerment_WPF.ApplicationFileConfig;
 using OrderManagerment_WPF.OrderObject;
 
