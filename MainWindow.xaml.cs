@@ -23,7 +23,6 @@ namespace OrderManagerment_WPF
         public MainWindow()
         {
             InitializeComponent();
-            _ = new ApplicationFileConfig.ApplicationFileCongfig();
         }
     }
 }
