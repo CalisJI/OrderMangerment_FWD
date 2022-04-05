@@ -8,6 +8,8 @@ namespace OrderManagerment_WPF.OrderObject
 {
     public class BangBaoGia
     {
+        
+        public int STT { get; set; }
         public string ProductName { get; set; }
         public string Marker  { get; set; }
         public int LeadTime_Giao { get; set; }

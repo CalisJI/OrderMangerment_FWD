@@ -68,7 +68,6 @@
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="OrderObject\BangBaoGia.cs" />
     <Compile Include="OrderObject\DanhSachDonHang.cs" />
-    <Compile Include="OrderObject\OservableCollection.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
