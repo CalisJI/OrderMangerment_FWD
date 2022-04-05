@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Cong_Viec\New folder\obj\Debug\
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\
 OrderManagerment_WPF
 none
 false
 DEBUG;TRACE
-F:\Cong_Viec\New folder\App.xaml
-3-2019088639
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\App.xaml
+4-889693888
 
-151817973425
-15144490394
-MainWindow.xaml;MainResource\MainResource.xaml;View\MainView.xaml;
+16120462882
+151790133499
+MainWindow.xaml;MainResource\MainResource.xaml;View\DanhSachDonHang_View.xaml;View\MainView.xaml;
 
 True
 

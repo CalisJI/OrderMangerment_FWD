@@ -68,9 +68,12 @@
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="OrderObject\BangBaoGia.cs" />
     <Compile Include="OrderObject\DanhSachDonHang.cs" />
-    <Compile Include="OrderObject\OservableCollection.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\DanhSachDonHang_ViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\DanhSachDonHang_View.xaml.cs">
+      <DependentUpon>DanhSachDonHang_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainResource\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DanhSachDonHang_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
