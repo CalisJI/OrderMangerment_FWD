@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderManagerment_WPF.ApplicationFileConfig;
 
 namespace OrderManagerment_WPF.ViewModel
 {
@@ -15,8 +16,10 @@ namespace OrderManagerment_WPF.ViewModel
             set => SetProperty(ref _selectedview, value, nameof(SelectedViewModel));
         }
         public MainViewModel mainViewModel;
+        
         public MainViewModel() 
         {
+
             mainViewModel = this;
         }
     }
