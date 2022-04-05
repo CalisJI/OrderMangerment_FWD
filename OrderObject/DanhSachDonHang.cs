@@ -10,7 +10,6 @@ namespace OrderManagerment_WPF.OrderObject
     public class DanhSachDonHang
     {
         public string Customer { get; set; }
-        public string OrderName { get; set; }
         public string Note { get; set; }
         public DateTime InputDay { get; set; }
         public TrangThai Stage { get; set; }
