@@ -13,7 +13,6 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignThemes.Wpf.Converters;
 using MaterialDesignThemes.Wpf.Transitions;
 using OrderManagerment_WPF.View;
-using OrderManagerment_WPF.ViewModel;
 using System;
 using System.Diagnostics;
 using System.Windows;
