@@ -20,4 +20,5 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
         public string LinkNas { get; set; }
         public List<string> DanhSachOrder { get; set; }
     }
+    
 }
