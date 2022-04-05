@@ -4,14 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using System.Windows.Input;
 
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-=======
->>>>>>> parent of da897f1 (datagrid Pennding)
 using OrderManagerment_WPF.ApplicationFileConfig;
 using OrderManagerment_WPF.OrderObject;
 
