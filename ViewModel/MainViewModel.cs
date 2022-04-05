@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+
 using OrderManagerment_WPF.ApplicationFileConfig;
 using OrderManagerment_WPF.OrderObject;
 
@@ -28,6 +30,18 @@ namespace OrderManagerment_WPF.ViewModel
             set 
             {
                 SetProperty(ref _danhSachDonHangs, value, nameof(DanhSachDonHangs));
+            }
+        }
+        private ObservableCollection<BangBaoGia> _BangBaoGias;
+        public ObservableCollection<BangBaoGia> BangBaoGias
+        {
+            get
+            {
+                return _BangBaoGias;
+            }
+            set
+            {
+                SetProperty(ref _BangBaoGias, value, nameof(BangBaoGias));
             }
         }
         #region Innitial
@@ -105,18 +119,27 @@ namespace OrderManagerment_WPF.ViewModel
             DanhSachDonHangs.Add(danhSachDonHang1);
            
         }
+        #endregion
 
+        #region ICommand
+       public static ICommand BangBaoGia { get; set; }
+        #endregion
         #region ViewModel
         DanhSachDonHang_ViewModel DanhSachDonHang_ViewModel = DanhSachDonHang_ViewModel.INS_DanhSachDonHangViewModel;
+        BangBaoGiaViewModel BangBaoGia_ViewModel = BangBaoGiaViewModel.INS_BangBaoGiaViewModel;
         #endregion
 
-        #endregion
+       
         public MainViewModel() 
         {
             GetData();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
-            
+            BangBaoGia= new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainViewModel.SelectedViewModel = BangBaoGia_ViewModel;
+            });
+
         }
     }
 }

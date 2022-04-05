@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:OrderManagerment_WPF.View"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
     </Grid>

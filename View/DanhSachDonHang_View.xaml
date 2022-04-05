@@ -27,8 +27,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-       
-        <Button Grid.Column="1" Height="100">
+
+        <Button DataContext="{StaticResource MainViewModel}" 
+                Command="{Binding BangBaoGia}"
+                Grid.Column="1" Height="100">
             
         </Button>
     </Grid>
