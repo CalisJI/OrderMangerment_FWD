@@ -17,6 +17,7 @@
             <DataTemplate DataType="{x:Type viewmodel:DanhSachDonHang_ViewModel}">
                 <view:DanhSachDonHang_View/>
             </DataTemplate>
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

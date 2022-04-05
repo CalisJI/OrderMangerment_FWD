@@ -25,10 +25,7 @@ namespace OrderManagerment_WPF.ViewModel
         
         public ObservableCollection<DanhSachDonHang> DanhSachDonHangs
         {
-            get
-            {
-                return ApplicationFileCongfig.DanhSachDonHangs;
-            }
+            get => ApplicationFileCongfig.DanhSachDonHangs;
             set => SetProperty(ref ApplicationFileCongfig.DanhSachDonHangs, value, nameof(DanhSachDonHangs));
         }
         #region Innitial
@@ -39,7 +36,7 @@ namespace OrderManagerment_WPF.ViewModel
             DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
             danhSachDonHang1.Alarm = Alarm.Pending;
             danhSachDonHang1.Customer = "aido";
-            danhSachDonHang1.OrderName = "Mạch Arduino";
+           
             danhSachDonHang1.InputDay = DateTime.Today;
             danhSachDonHang1.Note = "note";
             danhSachDonHang1.Stage = TrangThai.PO;
@@ -106,7 +103,7 @@ namespace OrderManagerment_WPF.ViewModel
             DanhSachDonHang danhSachDonHang2 = new DanhSachDonHang();
             danhSachDonHang2.Alarm = Alarm.Pending;
             danhSachDonHang2.Customer = "Nguoikahc";
-            danhSachDonHang2.OrderName = "DriverMotor";
+            
             danhSachDonHang2.InputDay = DateTime.Today;
             danhSachDonHang2.Note = "Note";
             danhSachDonHang2.Stage = TrangThai.Dagiao;
