@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:OrderManagerment_WPF"
         mc:Ignorable="d"
         xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
-        
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="1080" Width="1920">
     <Grid DataContext="{StaticResource MainViewModel}">
         <ContentControl Content="{Binding SelectedViewModel}">
 
