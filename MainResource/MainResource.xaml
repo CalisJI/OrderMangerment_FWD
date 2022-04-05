@@ -3,5 +3,5 @@
                     xmlns:views="clr-namespace:OrderManagerment_WPF.View"
                     xmlns:viewmodels="clr-namespace:OrderManagerment_WPF.ViewModel">
     <viewmodels:MainViewModel x:Key="MainViewModel"/>
-
+    <viewmodels:DanhSachDonHang_ViewModel x:Key="Danhsachdonhang"/>
 </ResourceDictionary>

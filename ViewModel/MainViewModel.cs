@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OrderManagerment_WPF.ApplicationFileConfig;
+using OrderManagerment_WPF.OrderObject;
 
 namespace OrderManagerment_WPF.ViewModel
 {
@@ -16,11 +18,105 @@ namespace OrderManagerment_WPF.ViewModel
             set => SetProperty(ref _selectedview, value, nameof(SelectedViewModel));
         }
         public MainViewModel mainViewModel;
-        
+        private ObservableCollection<DanhSachDonHang> _danhSachDonHangs;
+        public ObservableCollection<DanhSachDonHang> DanhSachDonHangs
+        {
+            get 
+            {
+                return _danhSachDonHangs;
+            }
+            set 
+            {
+                SetProperty(ref _danhSachDonHangs, value, nameof(DanhSachDonHangs));
+            }
+        }
+        #region Innitial
+
+        public void GetData() 
+        {
+            DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
+            DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
+            danhSachDonHang1.Alarm = Alarm.Pending;
+            danhSachDonHang1.Customer = "aido";
+            danhSachDonHang1.InputDay = DateTime.Today;
+            danhSachDonHang1.Note = "note";
+            danhSachDonHang1.Stage = TrangThai.ChuaBaoGia;
+            danhSachDonHang1.ProductDetails = new ObservableCollection<BangBaoGia>()
+            {
+               new BangBaoGia()
+                {
+                    ProductName = "ten1",
+                    Nguoimua = "người 1",
+                    Marker = "",
+                    Note="dd",
+                    But_Price_U = 198516,
+                    LeadTime_Buy = 2,
+                    LeadTime_Giao = 5,
+                    Link_Buy_Spare = "",
+                    Buy_Linking = "dffff",
+                    Quantity=5,
+                    STT = 1,
+                    Total=8555,
+                    Total_Price_B_P=555,
+                    Transport_Fee=551,
+                    Unit = "PCS"
+
+                },
+                new BangBaoGia()
+                {
+                    ProductName = "ten1",
+                    Nguoimua = "người 2",
+                    Marker = "",
+                    Note="dd",
+                    But_Price_U = 198516,
+                    LeadTime_Buy = 2,
+                    LeadTime_Giao = 5,
+                    Link_Buy_Spare = "",
+                    Buy_Linking = "dffff",
+                    Quantity=5,
+                    STT = 1,
+                    Total=8555,
+                    Total_Price_B_P=555,
+                    Transport_Fee=551,
+                    Unit = "PCS"
+
+                },
+                new BangBaoGia()
+                {
+                    ProductName = "ten1",
+                    Nguoimua = "người 3",
+                    Marker = "",
+                    Note="dd",
+                    But_Price_U = 198516,
+                    LeadTime_Buy = 2,
+                    LeadTime_Giao = 5,
+                    Link_Buy_Spare = "",
+                    Buy_Linking = "dffff",
+                    Quantity=5,
+                    STT = 1,
+                    Total=8555,
+                    Total_Price_B_P=555,
+                    Transport_Fee=551,
+                    Unit = "PCS"
+
+                }
+            };
+           
+            DanhSachDonHangs.Add(danhSachDonHang1);
+           
+        }
+
+        #region ViewModel
+        DanhSachDonHang_ViewModel DanhSachDonHang_ViewModel = DanhSachDonHang_ViewModel.INS_DanhSachDonHangViewModel;
+        #endregion
+
+        #endregion
         public MainViewModel() 
         {
-
+            GetData();
             mainViewModel = this;
+            mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+            
         }
     }
 }

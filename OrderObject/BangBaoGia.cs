@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderManagerment_WPF.OrderObject
 {
-    public class BangBaoGia
+    public class BangBaoGia 
     {
         
         public int STT { get; set; }
