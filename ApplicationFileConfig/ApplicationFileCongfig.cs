@@ -89,7 +89,6 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                 }
             }
             
-<<<<<<< HEAD
         }
         //Cái này để test thử
         /// <summary>
@@ -97,9 +96,6 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
         /// </summary>
         /// <param name="data"></param>
         /// <param name="MapFile_Path"></param>
-=======
-        }// quang xonng
->>>>>>> brandQuang
         public static void Update_Data(object data = null, string MapFile_Path = "")
         {
             if (MapFile_Path != "") 
