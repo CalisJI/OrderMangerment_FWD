@@ -89,7 +89,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                 }
             }
             
-        }
+        }// quang xonng
         public static void Update_Data(object data = null, string MapFile_Path = "")
         {
             if (MapFile_Path != "") 
