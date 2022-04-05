@@ -88,6 +88,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
             }
             
         }
+        // Cái j đó mơi
         //Cái này để test thử
         /// <summary>
         /// 
