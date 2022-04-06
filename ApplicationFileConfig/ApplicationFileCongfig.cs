@@ -41,7 +41,8 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                             FileInfo[] fileInfo = directory.GetFiles("*.xml");
                             foreach (FileInfo item in fileInfo)
                             {
-                                SystemConfig.DanhSachOrder.Add(item.Name);
+                                string a = System.IO.Path.GetFileNameWithoutExtension(item.FullName);
+                                SystemConfig.DanhSachOrder.Add(a);
                             }
                             foreach (string item in SystemConfig.DanhSachOrder)
                             {
@@ -172,9 +173,9 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
             if (MapFile_Path != "")
             {
                 Type type = data.GetType();
-                CheckFileExit(Create_MapFile(MapFile_Path));
+                CheckFileExit(Create_MapFile(MapFile_Path, true));
                 XmlSerializer xmlSerializer = new XmlSerializer(type);
-                using (TextWriter textWriter = new StreamWriter(Create_MapFile(MapFile_Path)))
+                using (TextWriter textWriter = new StreamWriter(Create_MapFile(MapFile_Path, true))) 
                 {
                     xmlSerializer.Serialize(textWriter, data);
                     textWriter.Close();
