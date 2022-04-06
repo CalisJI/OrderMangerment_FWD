@@ -61,3 +61,4 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\Microsoft.Expression
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Interactivity.dll
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\Microsoft.Expression.Interactions.xml
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Interactivity.xml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
