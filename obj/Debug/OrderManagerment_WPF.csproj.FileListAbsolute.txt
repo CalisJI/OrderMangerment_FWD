@@ -57,3 +57,8 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.CopyComplete
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.exe
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.pdb
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\Microsoft.Expression.Interactions.dll
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Interactivity.dll
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\Microsoft.Expression.Interactions.xml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Interactivity.xml

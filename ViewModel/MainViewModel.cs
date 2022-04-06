@@ -18,6 +18,7 @@ namespace OrderManagerment_WPF.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Model of MainViewModel
         private BaseViewModel _selectedview;
         public BaseViewModel SelectedViewModel
         {
@@ -25,17 +26,41 @@ namespace OrderManagerment_WPF.ViewModel
             set => SetProperty(ref _selectedview, value, nameof(SelectedViewModel));
         }
         public MainViewModel mainViewModel;
-        
+
         public ObservableCollection<DanhSachDonHang> DanhSachDonHangs
         {
             get => ApplicationFileCongfig.DanhSachDonHangs;
             set => SetProperty(ref ApplicationFileCongfig.DanhSachDonHangs, value, nameof(DanhSachDonHangs));
         }
+        private bool _EnableEdit;
+        public bool EnableEdit
+        {
+            get
+            {
+                return _EnableEdit;
+            }
+            set
+            {
+                SetProperty(ref _EnableEdit, value, nameof(EnableEdit));
+            }
+        }
+        
+        #endregion
+
         #region Innitial
         #region Icommand
         public static ICommand  UpdateProperty { get; set; }
         public ICommand DeleteDonHang { get; set; }
         public ICommand AddOrder { get; set; }
+        public ICommand Save { get; set; }
+        public ICommand Edit { get; set; }
+        public ICommand ItemDetermine { get; set; }
+        #endregion
+        #region Variable
+        private string Neworder = string.Empty;
+        private int indexnew = 0;
+        private DanhSachDonHang OrderSelected = new DanhSachDonHang();
+        private List<DanhSachDonHang> TempListOrder = new List<DanhSachDonHang>();
         #endregion
         public void GetData() 
         {
@@ -227,6 +252,8 @@ namespace OrderManagerment_WPF.ViewModel
                     DanhSachDonHangs.Add(danhSachDonHang);
                     DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == 0);
                     a.IDOrder = DanhSachDonHangs.IndexOf(a) + 1;
+                    indexnew = a.IDOrder;
+                    EnableEdit = true;
                 }
                 catch (Exception)
                 {
@@ -234,13 +261,55 @@ namespace OrderManagerment_WPF.ViewModel
                     
                 }
             });
+            Save = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    EnableEdit = false;
+                    if (indexnew > 0) 
+                    {
+                        DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == indexnew);
+                        _ = ApplicationFileCongfig.Get_Data<DanhSachDonHang>(a.Customer + a.IDOrder);
+                        ApplicationFileCongfig.Update_Data(a, a.IDOrder.ToString());
+                        indexnew = -1;
+                    }
+                    foreach (var item in TempListOrder)
+                    {
+                        ApplicationFileCongfig.Update_Data(item, item.IDOrder.ToString());
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
+                
+            });
+            Edit = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                EnableEdit = true;
+            });
+            ItemDetermine = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (EnableEdit) 
+                {
+                    OrderSelected = (DanhSachDonHang)p;
+                    if (!TempListOrder.Contains((DanhSachDonHang)p)) 
+                    {
+                        TempListOrder.Add((DanhSachDonHang)p);
+                    }
+                }
+                
+            });
+            
         }
         public void DeleteOrder(DanhSachDonHang danhSachDonHang) 
         {
             try
             {
                 _ = DanhSachDonHangs.Remove(danhSachDonHang);
-                ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.Customer + danhSachDonHang.IDOrder);
+                ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.IDOrder.ToString());
             }
             catch (Exception ex)
             {
@@ -352,4 +421,5 @@ namespace OrderManagerment_WPF.ViewModel
             return null;
         }
     }
+    
 }

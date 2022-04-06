@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrderManagerment_WPF.View"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:EnumConvert="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
@@ -14,6 +15,8 @@
         <ColorConver:GridRowColor x:Key="GridSetColor"/>
         <EnumConvert:EnumToString x:Key="EnumToString"/>
         <AlarmToStrong:AlarmToString x:Key="AlarmToString"/>
+      
+
     </UserControl.Resources>
     <Viewbox>
         <Grid Width="1920"
@@ -23,14 +26,22 @@
                 <ColumnDefinition Width="0.15*"/>
             </Grid.ColumnDefinitions>
             <DataGrid 
+                IsReadOnly="{Binding EnableEdit, Converter={StaticResource InvertBooleanConverter}}"
                 x:Name="ListDonhang"
                 SelectionMode="Single"
                 Height="1000"
                 Width="1650"
                 HorizontalAlignment="Left"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding DanhSachDonHangs}">
                 
+                ItemsSource="{Binding DanhSachDonHangs}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding ItemDetermine}"
+                            CommandParameter="{Binding ElementName=ListDonhang, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Binding="{Binding IDOrder}"
@@ -146,8 +157,16 @@
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="150"
                     Margin="10"
-                    Command="{Binding DeleteDonHang}"
-                    CommandParameter="{Binding ElementName=ListDonhang ,Path=SelectedItem}"
+                    Command="{Binding Edit}"
+                    IsEnabled="{Binding EnableEdit, Converter={StaticResource InvertBooleanConverter}}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Chỉnh sửa "/>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    Command="{Binding Save}"
+                    IsEnabled="{Binding EnableEdit}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                     Content="Lưu "/>
             </StackPanel>
