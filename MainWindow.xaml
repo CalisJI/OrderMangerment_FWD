@@ -8,6 +8,7 @@
         xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
         Title="MainWindow" Height="450" Width="800">
     <Grid DataContext="{StaticResource MainViewModel}">
         <ContentControl Content="{Binding SelectedViewModel}">

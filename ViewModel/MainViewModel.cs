@@ -311,6 +311,46 @@ namespace OrderManagerment_WPF.ViewModel
             });
             
         }
+        #region Method
+        public void Notify(DateTime value)
+        {
+            DateTime dateTime = DateTime.Today;
+            TimeSpan timeSpan = dateTime - value;
+            string Notify = string.Empty;
+            double left = timeSpan.TotalDays;
+
+            List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.InputDay == value).ToList();
+            foreach (DanhSachDonHang item in a)
+            {
+                if (item.Stage != TrangThai.PO)
+                {
+                    if (left > item.RangeAlarm)
+                    {
+                        item.Alarm = Alarm.Pending;
+                    }
+                    else if (left <= item.RangeAlarm)
+                    {
+                        item.Alarm = Alarm.Late;
+                    }
+                }
+                else
+                {
+                    item.Alarm = Alarm.Done;
+                }
+            }
+            foreach (var item in DanhSachDonHangs)
+            {
+                if (item.Alarm == Alarm.Late) 
+                {
+                    Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
+                }
+            }
+            if (Notify != "") 
+            {
+                App.NotifyIcon.ShowBalloonTip(10000, "Đơn hàng cần xử lý", Notify, System.Windows.Forms.ToolTipIcon.Warning);
+            }
+        }
+        #endregion
         public void DeleteOrder(DanhSachDonHang danhSachDonHang) 
         {
             try
@@ -402,34 +442,35 @@ namespace OrderManagerment_WPF.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public string Notify(DateTime value)
+        public string Notify(DanhSachDonHang value)
         {
             DateTime dateTime = DateTime.Today;
-            TimeSpan timeSpan = dateTime - value;
+            TimeSpan timeSpan = dateTime - value.InputDay;
             
             double left = timeSpan.TotalDays;
-            List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.InputDay == value).ToList();
-            foreach (DanhSachDonHang item in a)
+            if (value.Stage != TrangThai.Dagiao)
             {
-                if(item.Stage == TrangThai.PO) 
+                if (left > value.RangeAlarm)
                 {
-                    if (left > item.RangeAlarm)
-                    {
-                        item.Alarm = Alarm.Pending;
-                    }
-                    else if (left <= item.RangeAlarm)
-                    {
-                        item.Alarm = Alarm.Late;
-                    }
+                    value.Alarm = Alarm.Pending;
+                }
+                else if (left <= value.RangeAlarm)
+                {
+                    value.Alarm = Alarm.Late;
                 }
             }
+            else
+            {
+                value.Alarm = Alarm.Done;
+            }
+
             MainViewModel.UpdateProperty.Execute(null);
             return string.Format("Còn lại {0} ngày", left);
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
-            return Notify((DateTime)value);
+            DanhSachDonHang a = ApplicationFileCongfig.DanhSachDonHangs.First(x => x.IDOrder == (int)value);
+            return Notify(a);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

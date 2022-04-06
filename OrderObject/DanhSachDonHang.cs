@@ -30,6 +30,7 @@ namespace OrderManagerment_WPF.OrderObject
     {
         Pending,
         Request,
-        Late
+        Late,
+        Done
     }
 }
