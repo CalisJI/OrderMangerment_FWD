@@ -215,7 +215,7 @@ namespace OrderManagerment_WPF.ViewModel
         #endregion
         public MainViewModel() 
         {
-            GetData();
+            //GetData();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
             UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -251,7 +251,8 @@ namespace OrderManagerment_WPF.ViewModel
                     };
                     DanhSachDonHangs.Add(danhSachDonHang);
                     DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == 0);
-                    a.IDOrder = DanhSachDonHangs.IndexOf(a) + 1;
+                    int max = DanhSachDonHangs.Max(x => x.IDOrder);
+                    a.IDOrder = max + 1;
                     indexnew = a.IDOrder;
                     EnableEdit = true;
                 }
@@ -269,14 +270,20 @@ namespace OrderManagerment_WPF.ViewModel
                     if (indexnew > 0) 
                     {
                         DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == indexnew);
-                        _ = ApplicationFileCongfig.Get_Data<DanhSachDonHang>(a.Customer + a.IDOrder);
+                        _ = ApplicationFileCongfig.Get_Data<DanhSachDonHang>(a.IDOrder.ToString());
                         ApplicationFileCongfig.Update_Data(a, a.IDOrder.ToString());
                         indexnew = -1;
                     }
-                    foreach (var item in TempListOrder)
+                    foreach (DanhSachDonHang item in TempListOrder)
                     {
                         ApplicationFileCongfig.Update_Data(item, item.IDOrder.ToString());
+                        if (!ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(item.IDOrder.ToString())) 
+                        {
+                            ApplicationFileCongfig.SystemConfig.DanhSachOrder.Add(item.IDOrder.ToString());
+                            ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
+                        }
                     }
+                    TempListOrder.Clear();
                     
                 }
                 catch (Exception ex)
@@ -308,8 +315,17 @@ namespace OrderManagerment_WPF.ViewModel
         {
             try
             {
+                if (danhSachDonHang == null) 
+                {
+                    danhSachDonHang = DanhSachDonHangs.ElementAt(0);
+                }
                 _ = DanhSachDonHangs.Remove(danhSachDonHang);
                 ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.IDOrder.ToString());
+                if (ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(danhSachDonHang.IDOrder.ToString())) 
+                {
+                    _ = ApplicationFileCongfig.SystemConfig.DanhSachOrder.Remove(danhSachDonHang.IDOrder.ToString());
+                    ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
+                }
             }
             catch (Exception ex)
             {

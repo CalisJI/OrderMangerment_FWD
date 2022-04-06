@@ -41,7 +41,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                             FileInfo[] fileInfo = directory.GetFiles("*.xml");
                             foreach (FileInfo item in fileInfo)
                             {
-                                string a = System.IO.Path.GetFileNameWithoutExtension(item.FullName);
+                                string a = Path.GetFileNameWithoutExtension(item.FullName);
                                 SystemConfig.DanhSachOrder.Add(a);
                             }
                             foreach (string item in SystemConfig.DanhSachOrder)
@@ -54,7 +54,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                         else
                         {
 
-                            foreach (var item in SystemConfig.DanhSachOrder)
+                            foreach (string item in SystemConfig.DanhSachOrder)
                             {
                                 DanhSachDonHang donHang = Get_Data<DanhSachDonHang>(item);
                                 DanhSachDonHangs.Add(donHang);
