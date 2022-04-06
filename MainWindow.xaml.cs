@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace OrderManagerment_WPF
 {
@@ -24,6 +25,12 @@ namespace OrderManagerment_WPF
         {
             InitializeComponent();
             _ = new ApplicationFileConfig.ApplicationFileCongfig();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visibility = Visibility.Hidden;
         }
     }
 }
