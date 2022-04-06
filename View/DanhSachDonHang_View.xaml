@@ -23,12 +23,27 @@
                 <ColumnDefinition Width="0.15*"/>
             </Grid.ColumnDefinitions>
             <DataGrid 
+                x:Name="ListDonhang"
+                SelectionMode="Single"
                 Height="1000"
                 Width="1650"
                 HorizontalAlignment="Left"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding DanhSachDonHangs}">
+                
                 <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding IDOrder}"
+                     
+                        FontWeight="DemiBold"
+                        FontSize="20">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="25"
+                                FontWeight="DemiBold"
+                                Text="STT"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
                     <DataGridTextColumn
                         Binding="{Binding Customer}"
                      
@@ -107,23 +122,26 @@
             </DataGrid>
             <StackPanel Grid.Column="1">
                 <Button
-                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                  Width="150"
-                  Margin="10"
-                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                  Content="Thêm Đơn Hàng"/>
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    Command="{Binding AddOrder}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Thêm Đơn Hàng"/>
                 <Button
-                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                  Width="150"
-                  Margin="10"
-                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                  Content="Xem Chi Tiết"/>
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Xem Chi Tiết"/>
                 <Button
-                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                  Width="150"
-                  Margin="10"
-                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                  Content="Xóa Đơn Hàng"/>
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    Command="{Binding DeleteDonHang}"
+                    CommandParameter="{Binding ElementName=ListDonhang ,Path=SelectedItem}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Xóa Đơn Hàng"/>
             </StackPanel>
            
            

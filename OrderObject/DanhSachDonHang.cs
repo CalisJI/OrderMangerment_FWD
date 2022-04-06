@@ -9,6 +9,7 @@ namespace OrderManagerment_WPF.OrderObject
 {
     public class DanhSachDonHang
     {
+        public int IDOrder { get; set; }
         public string Customer { get; set; }
         public int RangeAlarm { get; set; }
         public string Note { get; set; }

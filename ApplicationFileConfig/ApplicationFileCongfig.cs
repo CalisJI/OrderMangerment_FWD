@@ -66,7 +66,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                 catch (Exception ex)
                 {
                     ConnectServer = false;
-
+                    Console.WriteLine(ex.Message);
                 }
 
             }
@@ -205,7 +205,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
             catch (Exception ex)
             {
 
-
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion

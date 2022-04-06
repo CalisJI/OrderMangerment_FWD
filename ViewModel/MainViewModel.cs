@@ -34,6 +34,8 @@ namespace OrderManagerment_WPF.ViewModel
         #region Innitial
         #region Icommand
         public static ICommand  UpdateProperty { get; set; }
+        public ICommand DeleteDonHang { get; set; }
+        public ICommand AddOrder { get; set; }
         #endregion
         public void GetData() 
         {
@@ -174,6 +176,11 @@ namespace OrderManagerment_WPF.ViewModel
             };
             DanhSachDonHangs.Add(danhSachDonHang1);
             DanhSachDonHangs.Add(danhSachDonHang2);
+            List<DanhSachDonHang> a = DanhSachDonHangs.Where(x => x.IDOrder == 0).ToList();
+            foreach (DanhSachDonHang item in a)
+            {
+                item.IDOrder = DanhSachDonHangs.IndexOf(item) + 1;
+            }
         }
 
         #region ViewModel
@@ -190,6 +197,56 @@ namespace OrderManagerment_WPF.ViewModel
             {
                 OnPropertyChanged(nameof(DanhSachDonHangs));
             });
+            DeleteDonHang = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    DeleteOrder((DanhSachDonHang)p);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
+            });
+            AddOrder = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    DanhSachDonHang danhSachDonHang = new DanhSachDonHang
+                    {
+                        Customer = "",
+                        IDOrder = 0,
+                        InputDay = DateTime.Today,
+                        ProductDetails = new ObservableCollection<BangBaoGia>(),
+                        Stage = TrangThai.ChuaBaoGia,
+                        RangeAlarm = 3,
+                        Note = "",
+                        Alarm = Alarm.Request
+                    };
+                    DanhSachDonHangs.Add(danhSachDonHang);
+                    DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == 0);
+                    a.IDOrder = DanhSachDonHangs.IndexOf(a) + 1;
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+            });
+        }
+        public void DeleteOrder(DanhSachDonHang danhSachDonHang) 
+        {
+            try
+            {
+                _ = DanhSachDonHangs.Remove(danhSachDonHang);
+                ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.Customer + danhSachDonHang.IDOrder);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
     }
     public class GridRowColor : IValueConverter
@@ -264,6 +321,7 @@ namespace OrderManagerment_WPF.ViewModel
         {
             DateTime dateTime = DateTime.Today;
             TimeSpan timeSpan = dateTime - value;
+            
             double left = timeSpan.TotalDays;
             List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.InputDay == value).ToList();
             foreach (DanhSachDonHang item in a)
