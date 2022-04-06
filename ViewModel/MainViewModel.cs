@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using OrderManagerment_WPF.ApplicationFileConfig;
@@ -29,12 +32,14 @@ namespace OrderManagerment_WPF.ViewModel
             set => SetProperty(ref ApplicationFileCongfig.DanhSachDonHangs, value, nameof(DanhSachDonHangs));
         }
         #region Innitial
-
+        #region Icommand
+        public static ICommand  UpdateProperty { get; set; }
+        #endregion
         public void GetData() 
         {
             DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
             DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
-            danhSachDonHang1.Alarm = Alarm.Pending;
+            danhSachDonHang1.RangeAlarm = 3;
             danhSachDonHang1.Customer = "aido";
            
             danhSachDonHang1.InputDay = DateTime.Today;
@@ -101,9 +106,9 @@ namespace OrderManagerment_WPF.ViewModel
                 }
             };
             DanhSachDonHang danhSachDonHang2 = new DanhSachDonHang();
-            danhSachDonHang2.Alarm = Alarm.Pending;
-            danhSachDonHang2.Customer = "Nguoikahc";
             
+            danhSachDonHang2.Customer = "Nguoikahc";
+            danhSachDonHang2.RangeAlarm = 2;
             danhSachDonHang2.InputDay = DateTime.Today;
             danhSachDonHang2.Note = "Note";
             danhSachDonHang2.Stage = TrangThai.Dagiao;
@@ -181,7 +186,10 @@ namespace OrderManagerment_WPF.ViewModel
             GetData();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
-            
+            UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                OnPropertyChanged(nameof(DanhSachDonHangs));
+            });
         }
     }
     public class GridRowColor : IValueConverter
@@ -233,33 +241,57 @@ namespace OrderManagerment_WPF.ViewModel
             return null;
         }
     }
-    //public class AlarmToString : IValueConverter
-    //{
-    //    public string Notify(DateTime value) 
-    //    {
-    //        DateTime dateTime = DateTime.Today;
-    //        TimeSpan timeSpan = dateTime - value;
-    //        double left = timeSpan.TotalDays;
-    //        return string.Format("Còn lại {0} ngày", left);
-    //    }
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        switch ((Alarm)value)
-    //        {
-    //            case Alarm.Pending:
-    //                retun
-    //            case Alarm.Request:
-    //                break;
-    //            case Alarm.Late:
-    //                break;
-    //            default:
-    //                break;
-    //        }
-    //    }
+    public class AlarmToString : IValueConverter
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual bool SetProperty<T>(ref T storge, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(storge, value))
+            {
+                return false;
+            }
 
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        return null;
-    //    }
-    //}
+            storge = value;
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public string Notify(DateTime value)
+        {
+            DateTime dateTime = DateTime.Today;
+            TimeSpan timeSpan = dateTime - value;
+            double left = timeSpan.TotalDays;
+            List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.InputDay == value).ToList();
+            foreach (DanhSachDonHang item in a)
+            {
+                if(item.Stage == TrangThai.PO) 
+                {
+                    if (left > item.RangeAlarm)
+                    {
+                        item.Alarm = Alarm.Pending;
+                    }
+                    else if (left <= item.RangeAlarm)
+                    {
+                        item.Alarm = Alarm.Late;
+                    }
+                }
+            }
+            MainViewModel.UpdateProperty.Execute(null);
+            return string.Format("Còn lại {0} ngày", left);
+        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            
+            return Notify((DateTime)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
 }

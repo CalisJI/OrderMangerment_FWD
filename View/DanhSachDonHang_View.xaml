@@ -8,10 +8,12 @@
              xmlns:EnumConvert="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:AlarmToStrong="clr-namespace:OrderManagerment_WPF.ViewModel"
              d:DesignHeight="1000" d:DesignWidth="1920">
     <UserControl.Resources>
         <ColorConver:GridRowColor x:Key="GridSetColor"/>
         <EnumConvert:EnumToString x:Key="EnumToString"/>
+        <AlarmToStrong:AlarmToString x:Key="AlarmToString"/>
     </UserControl.Resources>
     <Viewbox>
         <Grid Width="1920"
@@ -76,7 +78,7 @@
 
                     </DataGridTextColumn>
                     <DataGridTextColumn
-                       Binding="{Binding Alarm, Converter={StaticResource EnumToString}}"
+                       Binding="{Binding InputDay, Converter={StaticResource AlarmToString}}"
                         FontWeight="DemiBold"
                         FontSize="20">
                         <DataGridTextColumn.Header>
@@ -87,6 +89,7 @@
                         </DataGridTextColumn.Header>
 
                     </DataGridTextColumn>
+                     
                 </DataGrid.Columns>
 
                 <DataGrid.RowStyle >
@@ -102,9 +105,27 @@
                 </DataGrid.RowStyle>
 
             </DataGrid>
-            <Button Grid.Column="1">
-                
-            </Button>
+            <StackPanel Grid.Column="1">
+                <Button
+                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                  Width="150"
+                  Margin="10"
+                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                  Content="Thêm Đơn Hàng"/>
+                <Button
+                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                  Width="150"
+                  Margin="10"
+                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                  Content="Xem Chi Tiết"/>
+                <Button
+                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                  Width="150"
+                  Margin="10"
+                  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                  Content="Xóa Đơn Hàng"/>
+            </StackPanel>
+           
            
         </Grid>
     </Viewbox>
