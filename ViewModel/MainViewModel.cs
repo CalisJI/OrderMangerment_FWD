@@ -465,7 +465,15 @@ namespace OrderManagerment_WPF.ViewModel
             }
 
             MainViewModel.UpdateProperty.Execute(null);
-            return string.Format("Còn lại {0} ngày", left);
+            if (left >= 0) 
+            {
+                return string.Format("Còn lại {0} ngày", left);
+            }
+            else 
+            {
+                return string.Format("Trễ {0} ngày", Math.Abs(left));
+            }
+            
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
