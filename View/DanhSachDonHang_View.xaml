@@ -15,8 +15,6 @@
         <ColorConver:GridRowColor x:Key="GridSetColor"/>
         <EnumConvert:EnumToString x:Key="EnumToString"/>
         <AlarmToStrong:AlarmToString x:Key="AlarmToString"/>
-      
-
     </UserControl.Resources>
     <Viewbox>
         <Grid Width="1920"
