@@ -55,6 +55,7 @@ namespace OrderManagerment_WPF.ViewModel
         public ICommand Save { get; set; }
         public ICommand Edit { get; set; }
         public ICommand ItemDetermine { get; set; }
+
         #endregion
         #region Variable
         private string Neworder = string.Empty;
@@ -68,7 +69,6 @@ namespace OrderManagerment_WPF.ViewModel
             DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
             danhSachDonHang1.RangeAlarm = 3;
             danhSachDonHang1.Customer = "aido";
-           
             danhSachDonHang1.InputDay = DateTime.Today;
             danhSachDonHang1.Note = "note";
             danhSachDonHang1.Stage = TrangThai.PO;
@@ -213,16 +213,16 @@ namespace OrderManagerment_WPF.ViewModel
         #endregion
 
         #endregion
-        public MainViewModel() 
+        public MainViewModel()
         {
             //GetData();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
-            UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) => 
+            UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 OnPropertyChanged(nameof(DanhSachDonHangs));
             });
-            DeleteDonHang = new RelayCommand<object>((p) => { return true; }, (p) => 
+            DeleteDonHang = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 try
                 {
@@ -234,7 +234,7 @@ namespace OrderManagerment_WPF.ViewModel
                     Console.WriteLine(ex.Message);
                 }
             });
-            AddOrder = new RelayCommand<object>((p) => { return true; }, (p) => 
+            AddOrder = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 try
                 {
@@ -259,15 +259,15 @@ namespace OrderManagerment_WPF.ViewModel
                 catch (Exception)
                 {
 
-                    
+
                 }
             });
-            Save = new RelayCommand<object>((p) => { return true; }, (p) => 
+            Save = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 try
                 {
                     EnableEdit = false;
-                    if (indexnew > 0) 
+                    if (indexnew > 0)
                     {
                         DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == indexnew);
                         _ = ApplicationFileCongfig.Get_Data<DanhSachDonHang>(a.IDOrder.ToString());
@@ -277,39 +277,39 @@ namespace OrderManagerment_WPF.ViewModel
                     foreach (DanhSachDonHang item in TempListOrder)
                     {
                         ApplicationFileCongfig.Update_Data(item, item.IDOrder.ToString());
-                        if (!ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(item.IDOrder.ToString())) 
+                        if (!ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(item.IDOrder.ToString()))
                         {
                             ApplicationFileCongfig.SystemConfig.DanhSachOrder.Add(item.IDOrder.ToString());
                             ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
                         }
                     }
                     TempListOrder.Clear();
-                    
+
                 }
                 catch (Exception ex)
                 {
 
                     Console.WriteLine(ex);
                 }
-                
+
             });
-            Edit = new RelayCommand<object>((p) => { return true; }, (p) => 
+            Edit = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 EnableEdit = true;
             });
-            ItemDetermine = new RelayCommand<object>((p) => { return true; }, (p) => 
+            ItemDetermine = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (EnableEdit) 
+                if (EnableEdit)
                 {
                     OrderSelected = (DanhSachDonHang)p;
-                    if (!TempListOrder.Contains((DanhSachDonHang)p)) 
+                    if (!TempListOrder.Contains((DanhSachDonHang)p))
                     {
                         TempListOrder.Add((DanhSachDonHang)p);
                     }
                 }
-                
+
             });
-            
+           
         }
         #region Method
         public void Notify(DateTime value)
@@ -338,9 +338,9 @@ namespace OrderManagerment_WPF.ViewModel
                     item.Alarm = Alarm.Done;
                 }
             }
-            foreach (var item in DanhSachDonHangs)
+            foreach (DanhSachDonHang item in DanhSachDonHangs)
             {
-                if (item.Alarm == Alarm.Late) 
+                if (item.Alarm == Alarm.Late || item.Alarm == Alarm.Pending || item.Alarm == Alarm.Request)
                 {
                     Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
                 }
@@ -444,36 +444,19 @@ namespace OrderManagerment_WPF.ViewModel
         }
         public string Notify(DanhSachDonHang value)
         {
-            DateTime dateTime = DateTime.Today;
-            TimeSpan timeSpan = dateTime - value.InputDay;
-            
-            double left = timeSpan.TotalDays;
-            if (value.Stage != TrangThai.Dagiao)
+            if(value.Stage!= TrangThai.Dagiao) 
             {
-                if (left > value.RangeAlarm)
-                {
-                    value.Alarm = Alarm.Pending;
-                }
-                else if (left <= value.RangeAlarm)
-                {
-                    value.Alarm = Alarm.Late;
-                }
-            }
-            else
-            {
-                value.Alarm = Alarm.Done;
-            }
-
-            MainViewModel.UpdateProperty.Execute(null);
-            if (left >= 0) 
-            {
-                return string.Format("Còn lại {0} ngày", left);
+                DateTime dateTime = DateTime.Today;
+                TimeSpan timeSpan = dateTime - value.InputDay;
+                double left = timeSpan.TotalDays;
+                return left >= 0 ? string.Format("Còn lại {0} ngày", left) : string.Format("Trễ {0} ngày", Math.Abs(left));
             }
             else 
             {
-                return string.Format("Trễ {0} ngày", Math.Abs(left));
+                return "Đã Giao";
             }
-            
+           
+
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
