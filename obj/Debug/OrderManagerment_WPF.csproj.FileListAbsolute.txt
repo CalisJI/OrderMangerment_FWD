@@ -6,7 +6,6 @@ F:\Cong_Viec\New folder\bin\Debug\MaterialDesignThemes.Wpf.dll
 F:\Cong_Viec\New folder\bin\Debug\MaterialDesignColors.pdb
 F:\Cong_Viec\New folder\bin\Debug\MaterialDesignThemes.Wpf.pdb
 F:\Cong_Viec\New folder\bin\Debug\MaterialDesignThemes.Wpf.xml
-F:\Cong_Viec\New folder\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
 F:\Cong_Viec\New folder\obj\Debug\MainWindow.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\MainView.g.cs
 F:\Cong_Viec\New folder\obj\Debug\App.g.cs
