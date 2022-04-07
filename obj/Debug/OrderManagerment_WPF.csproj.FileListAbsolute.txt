@@ -62,3 +62,17 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Inter
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\Microsoft.Expression.Interactions.xml
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\bin\Debug\System.Windows.Interactivity.xml
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.DataSet.dll
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.dll
+F:\Cong_Viec\New folder\bin\Debug\Microsoft.Expression.Interactions.dll
+F:\Cong_Viec\New folder\bin\Debug\System.Windows.Interactivity.dll
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.pdb
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.xml
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.DataSet.pdb
+F:\Cong_Viec\New folder\bin\Debug\ExcelDataReader.DataSet.xml
+F:\Cong_Viec\New folder\bin\Debug\Microsoft.Expression.Interactions.xml
+F:\Cong_Viec\New folder\bin\Debug\System.Windows.Interactivity.xml
+F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.g.cs
+F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.g.cs
+F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.baml
+F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.baml
