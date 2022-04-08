@@ -85,13 +85,18 @@
     <Compile Include="ApplicationFileConfig\SystemConfig.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="OrderObject\BangBaoGia.cs" />
+    <Compile Include="OrderObject\BangThongKe.cs" />
     <Compile Include="OrderObject\DanhSachDonHang.cs" />
     <Compile Include="ViewModel\BangBaoGiaViewModel.cs" />
+    <Compile Include="ViewModel\BangThongKe_ViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DanhSachDonHang_ViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\BangBaoGiaView.xaml.cs">
       <DependentUpon>BangBaoGiaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BangThongKe_View.xaml.cs">
+      <DependentUpon>BangThongKe_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DanhSachDonHang_View.xaml.cs">
       <DependentUpon>DanhSachDonHang_View.xaml</DependentUpon>
@@ -116,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BangBaoGiaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BangThongKe_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
