@@ -5,18 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrderManagerment_WPF.View"
              mc:Ignorable="d" 
+             xmlns:enumlocal="clr-namespace:OrderManagerment_WPF.OrderObject"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:EnumConvert="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:AlarmToStrong="clr-namespace:OrderManagerment_WPF.ViewModel"
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="1000" d:DesignWidth="1920">
     <UserControl.Resources>
         <ColorConver:GridRowColor x:Key="GridSetColor"/>
         <EnumConvert:EnumToString x:Key="EnumToString"/>
         <AlarmToStrong:AlarmToString x:Key="AlarmToString"/>
-      
 
+        <ObjectDataProvider x:Key="myEnum" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumlocal:TrangThai"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <Style x:Key="TextBlockComboBoxStyle"
+       TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <TextBlock 
+                           FontSize="20" FontWeight="DemiBold"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Viewbox>
         <Grid Width="1920"
@@ -43,6 +60,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
+                    
                     <DataGridTextColumn
                         Binding="{Binding IDOrder}"
                      
@@ -79,6 +97,7 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn
+                       
                        Binding="{Binding InputDay, StringFormat=dd/MM/yyyy}"
                         
                         FontWeight="DemiBold"
@@ -88,21 +107,22 @@
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Ngày Yêu Cầu"/>
+                            
                         </DataGridTextColumn.Header>
-
+                       
                     </DataGridTextColumn>
-                    <DataGridTextColumn
-                       Binding="{Binding Stage, Converter={StaticResource EnumToString}}"
-                        FontWeight="DemiBold"
-                        FontSize="20">
-                        <DataGridTextColumn.Header>
+                    <DataGridComboBoxColumn
+                        
+                        SelectedItemBinding="{Binding Stage}"
+                        ItemsSource="{Binding Source={StaticResource myEnum}}">
+                        <DataGridComboBoxColumn.Header>
                             <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Trạng Thái"/>
-                        </DataGridTextColumn.Header>
-
-                    </DataGridTextColumn>
+                        </DataGridComboBoxColumn.Header>
+                        
+                    </DataGridComboBoxColumn>
                     <DataGridTextColumn
                        Binding="{Binding IDOrder, Converter={StaticResource AlarmToString}}"
                         FontWeight="DemiBold"
@@ -143,8 +163,16 @@
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="150"
                     Margin="10"
+                    
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Xem Chi Tiết"/>
+                    Content="Chi Tiết Đơn Hàng"/>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    Command="{Binding ThongkeTable}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Bảng Thống Kê"/>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="150"
