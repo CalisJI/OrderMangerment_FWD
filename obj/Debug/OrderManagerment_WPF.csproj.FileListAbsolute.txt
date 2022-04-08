@@ -75,4 +75,5 @@ F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.baml
 F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.baml
-F:\Cong_Viec\New folder\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
+F:\Cong_Viec\New folder\obj\Debug\View\BangThongKe_View.g.cs
+F:\Cong_Viec\New folder\obj\Debug\View\BangThongKe_View.baml

@@ -403,7 +403,7 @@ namespace OrderManagerment_WPF.ViewModel
                 else
                 {
                     item.Alarm = Alarm.Done;
-                    Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {left} ngày" + Environment.NewLine;
+                    
                 }
             }
             //foreach (DanhSachDonHang item in DanhSachDonHangs)
