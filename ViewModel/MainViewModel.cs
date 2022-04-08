@@ -45,12 +45,12 @@ namespace OrderManagerment_WPF.ViewModel
                 SetProperty(ref _EnableEdit, value, nameof(EnableEdit));
             }
         }
-        
+
         #endregion
 
         #region Innitial
         #region Icommand
-        public static ICommand  UpdateProperty { get; set; }
+        public static ICommand UpdateProperty { get; set; }
         public ICommand DeleteDonHang { get; set; }
         public ICommand AddOrder { get; set; }
         public static ICommand Save { get; set; }
@@ -58,14 +58,18 @@ namespace OrderManagerment_WPF.ViewModel
         public ICommand ItemDetermine { get; set; }
         public ICommand tesst { get; set; }
         public ICommand ThongkeTable { get; set; }
+        public ICommand ChiTietBangBaoGia { get; set; }
+        public ICommand QuayVe { get; set; }
+
         #endregion
         #region Variable
         private DispatcherTimer TimerNotify;
         private int indexnew = 0;
-        private DanhSachDonHang OrderSelected = new DanhSachDonHang();
+        public static DanhSachDonHang OrderSelected;
         private List<DanhSachDonHang> TempListOrder = new List<DanhSachDonHang>();
+        public BangBaoGiaViewModel BangBaoGiaViewModel = BangBaoGiaViewModel.INS_BangBaoGiaViewModel;
         #endregion
-        public void GetData() 
+        public void GetData()
         {
             DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
             DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
@@ -135,7 +139,7 @@ namespace OrderManagerment_WPF.ViewModel
                 }
             };
             DanhSachDonHang danhSachDonHang2 = new DanhSachDonHang();
-            
+
             danhSachDonHang2.Customer = "Nguoikahc";
             danhSachDonHang2.RangeAlarm = 2;
             danhSachDonHang2.InputDay = DateTime.Today;
@@ -349,6 +353,20 @@ namespace OrderManagerment_WPF.ViewModel
         private void TimerNotify_Tick(object sender, EventArgs e)
         {
             Notify();
+           ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                OrderSelected = (DanhSachDonHang)p;
+                mainViewModel.SelectedViewModel = BangBaoGiaViewModel;
+                //BangBaoGiaViewModel.Orderselect = (DanhSachDonHang)p;
+
+            });
+            QuayVe = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+                mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+
+            });
+
         }
         #region Method
         public void Notify()
@@ -385,6 +403,7 @@ namespace OrderManagerment_WPF.ViewModel
                 else
                 {
                     item.Alarm = Alarm.Done;
+                    Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {left} ngày" + Environment.NewLine;
                 }
             }
             //foreach (DanhSachDonHang item in DanhSachDonHangs)
@@ -400,17 +419,17 @@ namespace OrderManagerment_WPF.ViewModel
             }
         }
         #endregion
-        public void DeleteOrder(DanhSachDonHang danhSachDonHang) 
+        public void DeleteOrder(DanhSachDonHang danhSachDonHang)
         {
             try
             {
-                if (danhSachDonHang == null) 
+                if (danhSachDonHang == null)
                 {
                     danhSachDonHang = DanhSachDonHangs.ElementAt(0);
                 }
                 _ = DanhSachDonHangs.Remove(danhSachDonHang);
                 ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.IDOrder.ToString());
-                if (ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(danhSachDonHang.IDOrder.ToString())) 
+                if (ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(danhSachDonHang.IDOrder.ToString()))
                 {
                     _ = ApplicationFileCongfig.SystemConfig.DanhSachOrder.Remove(danhSachDonHang.IDOrder.ToString());
                     ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
@@ -500,11 +519,11 @@ namespace OrderManagerment_WPF.ViewModel
                 double left = timeSpan.TotalDays;
                 return left >= 0 ? string.Format("Còn lại {0} ngày", left) : string.Format("Trễ {0} ngày", Math.Abs(left));
             }
-            else 
+            else
             {
                 return "Đã Giao";
             }
-           
+
 
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -518,5 +537,5 @@ namespace OrderManagerment_WPF.ViewModel
             return null;
         }
     }
-    
+
 }
