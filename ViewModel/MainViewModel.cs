@@ -348,12 +348,8 @@ namespace OrderManagerment_WPF.ViewModel
             {
                 mainViewModel.SelectedViewModel = BangThongKe_ViewModel;
             });
-        }
 
-        private void TimerNotify_Tick(object sender, EventArgs e)
-        {
-            Notify();
-           ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 OrderSelected = (DanhSachDonHang)p;
                 mainViewModel.SelectedViewModel = BangBaoGiaViewModel;
@@ -366,6 +362,12 @@ namespace OrderManagerment_WPF.ViewModel
                 mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
 
             });
+        }
+
+        private void TimerNotify_Tick(object sender, EventArgs e)
+        {
+            Notify();
+           
 
         }
         #region Method

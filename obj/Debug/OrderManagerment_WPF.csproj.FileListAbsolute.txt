@@ -75,5 +75,12 @@ F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\BangBaoGiaView.baml
 F:\Cong_Viec\New folder\obj\Debug\View\DanhSachDonHang_View.baml
+<<<<<<< HEAD
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangBaoGiaView.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangBaoGiaView.baml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangThongKe_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangThongKe_View.baml
+=======
 F:\Cong_Viec\New folder\obj\Debug\View\BangThongKe_View.g.cs
 F:\Cong_Viec\New folder\obj\Debug\View\BangThongKe_View.baml
+>>>>>>> 5bb5182a004a35dce109a4cae697225e702cafb3
