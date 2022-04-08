@@ -12,9 +12,7 @@
 using MaterialDesignThemes.Wpf;
 using MaterialDesignThemes.Wpf.Converters;
 using MaterialDesignThemes.Wpf.Transitions;
-using OrderManagerment_WPF.OrderObject;
 using OrderManagerment_WPF.View;
-using OrderManagerment_WPF.ViewModel;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -25,7 +23,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
