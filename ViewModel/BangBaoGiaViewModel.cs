@@ -11,8 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Forms;
-
-
+using OrderManagerment_WPF.OrderObject;
 
 namespace OrderManagerment_WPF.ViewModel
 {
@@ -39,6 +38,7 @@ namespace OrderManagerment_WPF.ViewModel
             set { _pageExcel = value; }
         }
         List<string> item = new List<string>();
+        private ObservableCollection<BangBaoGia> DSBangBaoGia = new ObservableCollection<BangBaoGia>();
 
         ObservableCollection<string> _pageSheet;
         public ObservableCollection<string> PageSheet
@@ -47,6 +47,18 @@ namespace OrderManagerment_WPF.ViewModel
             set
             {
                 SetProperty(ref _pageSheet, value, nameof(PageSheet));
+            }
+        }
+        private DanhSachDonHang ds;
+        public DanhSachDonHang Orderselect
+        {
+            get
+            {
+                return MainViewModel.OrderSelected;
+            }
+            set
+            {
+                SetProperty(ref MainViewModel.OrderSelected, value, nameof(Orderselect));
             }
         }
         private int PageCOunt;
@@ -92,6 +104,28 @@ namespace OrderManagerment_WPF.ViewModel
                             PageSheet = vs;
                             Page_Count = PageSheet.Count + 1;
                             DatatableExcel = DataTableCollection[0];
+                            for(int i =19; i<31; i++)
+                            {
+                                BangBaoGia bangBaoGia = new BangBaoGia();
+                                DanhSachDonHang danhSachDonHang = new DanhSachDonHang();
+                                bangBaoGia.STT =0;
+                                bangBaoGia.Marker = "";
+                                bangBaoGia.LeadTime_Buy = 0;
+                                bangBaoGia.LeadTime_Giao = 0;
+                                bangBaoGia.Link_Buy_Spare = "";
+                                bangBaoGia.Nguoimua = "";
+                                bangBaoGia.Note = "";
+                                bangBaoGia.Quantity = 0;
+                                bangBaoGia.Total = 0;
+                                bangBaoGia.Total_Price_B_P =0;
+                                bangBaoGia.Transport_Fee = 0;
+                                bangBaoGia.Unit = "";
+                                string a = DatatableExcel.Rows[i][2].ToString();
+                                bangBaoGia.ProductName = a.ToString();
+                               Orderselect.ProductDetails.Add(bangBaoGia);
+                            }    
+                            
+                           
 
 
                         }

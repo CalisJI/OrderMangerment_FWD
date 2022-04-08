@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\ApplicationFileConfig",
+    "\\View",
     "\\ViewModel"
   ],
-  "SelectedNode": "\\ViewModel\\DanhSachDonHang_ViewModel.cs",
+  "SelectedNode": "\\View\\BangBaoGiaView.xaml",
   "PreviewInSolutionExplorer": false
 }
