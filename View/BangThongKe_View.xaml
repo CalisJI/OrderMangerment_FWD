@@ -239,6 +239,14 @@
                     IsEnabled="{Binding Editable}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                     Content="Lưu "/>
+                <Button
+                    
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Width="150"
+                    Margin="10"
+                    
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                    Content="Trở Lại"/>
             </StackPanel>
         </Grid>
     </Viewbox>
