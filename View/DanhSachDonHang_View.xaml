@@ -161,6 +161,9 @@
                     Content="Thêm Đơn Hàng"/>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    DataContext="{StaticResource MainViewModel}"
+                    Command="{Binding ChiTietBangBaoGia}"
+                    CommandParameter="{ Binding ElementName=ListDonhang, Path=SelectedItem}"
                     Width="150"
                     Margin="10"
                     
