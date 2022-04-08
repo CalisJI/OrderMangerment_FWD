@@ -18,6 +18,7 @@ namespace OrderManagerment_WPF.OrderObject
         public Alarm Alarm { get; set; }
         public ObservableCollection<BangBaoGia> ProductDetails { get; set; }
         
+        
     }
     public enum TrangThai 
     {

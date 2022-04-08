@@ -44,26 +44,29 @@ namespace OrderManagerment_WPF.ViewModel
                 SetProperty(ref _EnableEdit, value, nameof(EnableEdit));
             }
         }
-        
+
         #endregion
 
         #region Innitial
         #region Icommand
-        public static ICommand  UpdateProperty { get; set; }
+        public static ICommand UpdateProperty { get; set; }
         public ICommand DeleteDonHang { get; set; }
         public ICommand AddOrder { get; set; }
         public ICommand Save { get; set; }
         public ICommand Edit { get; set; }
         public ICommand ItemDetermine { get; set; }
+        public ICommand ChiTietBangBaoGia { get; set; }
+        public ICommand QuayVe { get; set; }
 
         #endregion
         #region Variable
         private string Neworder = string.Empty;
         private int indexnew = 0;
-        private DanhSachDonHang OrderSelected = new DanhSachDonHang();
+        public static DanhSachDonHang OrderSelected;
         private List<DanhSachDonHang> TempListOrder = new List<DanhSachDonHang>();
+        public BangBaoGiaViewModel BangBaoGiaViewModel = BangBaoGiaViewModel.INS_BangBaoGiaViewModel;
         #endregion
-        public void GetData() 
+        public void GetData()
         {
             DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
             DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
@@ -133,7 +136,7 @@ namespace OrderManagerment_WPF.ViewModel
                 }
             };
             DanhSachDonHang danhSachDonHang2 = new DanhSachDonHang();
-            
+
             danhSachDonHang2.Customer = "Nguoikahc";
             danhSachDonHang2.RangeAlarm = 2;
             danhSachDonHang2.InputDay = DateTime.Today;
@@ -302,6 +305,7 @@ namespace OrderManagerment_WPF.ViewModel
                 if (EnableEdit)
                 {
                     OrderSelected = (DanhSachDonHang)p;
+                    //BangBaoGiaViewModel.Orderselect = OrderSelected;
                     if (!TempListOrder.Contains((DanhSachDonHang)p))
                     {
                         TempListOrder.Add((DanhSachDonHang)p);
@@ -309,7 +313,20 @@ namespace OrderManagerment_WPF.ViewModel
                 }
 
             });
-           
+           ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                OrderSelected = (DanhSachDonHang)p;
+                mainViewModel.SelectedViewModel = BangBaoGiaViewModel;
+                //BangBaoGiaViewModel.Orderselect = (DanhSachDonHang)p;
+
+            });
+            QuayVe = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+                mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+
+            });
+
         }
         #region Method
         public void Notify(DateTime value)
@@ -342,26 +359,26 @@ namespace OrderManagerment_WPF.ViewModel
             {
                 if (item.Alarm == Alarm.Late || item.Alarm == Alarm.Pending || item.Alarm == Alarm.Request)
                 {
-                    Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
+                    Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {left} ngày" + Environment.NewLine;
                 }
             }
-            if (Notify != "") 
+            if (Notify != "")
             {
                 App.NotifyIcon.ShowBalloonTip(10000, "Đơn hàng cần xử lý", Notify, System.Windows.Forms.ToolTipIcon.Warning);
             }
         }
         #endregion
-        public void DeleteOrder(DanhSachDonHang danhSachDonHang) 
+        public void DeleteOrder(DanhSachDonHang danhSachDonHang)
         {
             try
             {
-                if (danhSachDonHang == null) 
+                if (danhSachDonHang == null)
                 {
                     danhSachDonHang = DanhSachDonHangs.ElementAt(0);
                 }
                 _ = DanhSachDonHangs.Remove(danhSachDonHang);
                 ApplicationFileCongfig.DeleteDonHang(danhSachDonHang.IDOrder.ToString());
-                if (ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(danhSachDonHang.IDOrder.ToString())) 
+                if (ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(danhSachDonHang.IDOrder.ToString()))
                 {
                     _ = ApplicationFileCongfig.SystemConfig.DanhSachOrder.Remove(danhSachDonHang.IDOrder.ToString());
                     ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
@@ -444,18 +461,18 @@ namespace OrderManagerment_WPF.ViewModel
         }
         public string Notify(DanhSachDonHang value)
         {
-            if(value.Stage!= TrangThai.Dagiao) 
+            if (value.Stage != TrangThai.Dagiao)
             {
                 DateTime dateTime = DateTime.Today;
                 TimeSpan timeSpan = dateTime - value.InputDay;
                 double left = timeSpan.TotalDays;
                 return left >= 0 ? string.Format("Còn lại {0} ngày", left) : string.Format("Trễ {0} ngày", Math.Abs(left));
             }
-            else 
+            else
             {
                 return "Đã Giao";
             }
-           
+
 
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -469,5 +486,5 @@ namespace OrderManagerment_WPF.ViewModel
             return null;
         }
     }
-    
+
 }
