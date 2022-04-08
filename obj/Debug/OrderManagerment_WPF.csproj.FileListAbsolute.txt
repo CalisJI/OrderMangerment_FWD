@@ -79,3 +79,4 @@ F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangBaoGiaView.
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangBaoGiaView.baml
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangThongKe_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\View\BangThongKe_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\OrderManagerment_WPF\obj\Debug\OrderManagerment_WPF.csproj.AssemblyReference.cache
