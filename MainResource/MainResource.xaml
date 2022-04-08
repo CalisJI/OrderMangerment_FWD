@@ -5,4 +5,5 @@
     <viewmodels:MainViewModel x:Key="MainViewModel"/>
     <viewmodels:DanhSachDonHang_ViewModel x:Key="Danhsachdonhang"/>
     <viewmodels:BangBaoGiaViewModel x:Key="BangBaoGia"/>
+    <viewmodels:BangThongKe_ViewModel x:Key="BangThongKe"/>
 </ResourceDictionary>

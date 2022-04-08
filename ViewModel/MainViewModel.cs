@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using OrderManagerment_WPF.ApplicationFileConfig;
 using OrderManagerment_WPF.OrderObject;
 
@@ -52,13 +53,14 @@ namespace OrderManagerment_WPF.ViewModel
         public static ICommand  UpdateProperty { get; set; }
         public ICommand DeleteDonHang { get; set; }
         public ICommand AddOrder { get; set; }
-        public ICommand Save { get; set; }
+        public static ICommand Save { get; set; }
         public ICommand Edit { get; set; }
         public ICommand ItemDetermine { get; set; }
-
+        public ICommand tesst { get; set; }
+        public ICommand ThongkeTable { get; set; }
         #endregion
         #region Variable
-        private string Neworder = string.Empty;
+        private DispatcherTimer TimerNotify;
         private int indexnew = 0;
         private DanhSachDonHang OrderSelected = new DanhSachDonHang();
         private List<DanhSachDonHang> TempListOrder = new List<DanhSachDonHang>();
@@ -138,7 +140,7 @@ namespace OrderManagerment_WPF.ViewModel
             danhSachDonHang2.RangeAlarm = 2;
             danhSachDonHang2.InputDay = DateTime.Today;
             danhSachDonHang2.Note = "Note";
-            danhSachDonHang2.Stage = TrangThai.Dagiao;
+            danhSachDonHang2.Stage = TrangThai.DaGiao;
             danhSachDonHang2.ProductDetails = new ObservableCollection<BangBaoGia>()
             {
                new BangBaoGia()
@@ -210,12 +212,18 @@ namespace OrderManagerment_WPF.ViewModel
 
         #region ViewModel
         DanhSachDonHang_ViewModel DanhSachDonHang_ViewModel = DanhSachDonHang_ViewModel.INS_DanhSachDonHangViewModel;
+        BangThongKe_ViewModel BangThongKe_ViewModel = BangThongKe_ViewModel.INS_BangThongKe;
         #endregion
 
         #endregion
         public MainViewModel()
         {
             //GetData();
+            TimerNotify = new DispatcherTimer();
+            TimerNotify.Interval = new TimeSpan(0,30,0);
+            TimerNotify.Tick += TimerNotify_Tick;
+            TimerNotify.IsEnabled = true;
+            TimerNotify.Start();
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
             UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -247,7 +255,12 @@ namespace OrderManagerment_WPF.ViewModel
                         Stage = TrangThai.ChuaBaoGia,
                         RangeAlarm = 3,
                         Note = "",
-                        Alarm = Alarm.Request
+                        Alarm = Alarm.Request,
+                        BangThongKe = new BangThongKe()
+                        {
+                            HQ = 500000
+                        }
+                        
                     };
                     DanhSachDonHangs.Add(danhSachDonHang);
                     DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == 0);
@@ -276,12 +289,21 @@ namespace OrderManagerment_WPF.ViewModel
                     }
                     foreach (DanhSachDonHang item in TempListOrder)
                     {
-                        ApplicationFileCongfig.Update_Data(item, item.IDOrder.ToString());
-                        if (!ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(item.IDOrder.ToString()))
+                        try
                         {
-                            ApplicationFileCongfig.SystemConfig.DanhSachOrder.Add(item.IDOrder.ToString());
-                            ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
+                            ApplicationFileCongfig.Update_Data(item, item.IDOrder.ToString());
+                            if (!ApplicationFileCongfig.SystemConfig.DanhSachOrder.Contains(item.IDOrder.ToString()))
+                            {
+                                ApplicationFileCongfig.SystemConfig.DanhSachOrder.Add(item.IDOrder.ToString());
+                                ApplicationFileCongfig.Update_Data(ApplicationFileCongfig.SystemConfig);
+                            }
                         }
+                        catch (Exception)
+                        {
+
+                            
+                        }
+                       
                     }
                     TempListOrder.Clear();
 
@@ -299,38 +321,65 @@ namespace OrderManagerment_WPF.ViewModel
             });
             ItemDetermine = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (EnableEdit)
+                try
                 {
-                    OrderSelected = (DanhSachDonHang)p;
-                    if (!TempListOrder.Contains((DanhSachDonHang)p))
+                    if (EnableEdit)
                     {
-                        TempListOrder.Add((DanhSachDonHang)p);
+                        OrderSelected = (DanhSachDonHang)p;
+                        if (!TempListOrder.Contains((DanhSachDonHang)p))
+                        {
+                            TempListOrder.Add((DanhSachDonHang)p);
+                        }
                     }
                 }
+                catch (Exception)
+                {
+
+                   
+                }
+               
 
             });
-           
+            ThongkeTable = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainViewModel.SelectedViewModel = BangThongKe_ViewModel;
+            });
+        }
+
+        private void TimerNotify_Tick(object sender, EventArgs e)
+        {
+            Notify();
         }
         #region Method
-        public void Notify(DateTime value)
+        public void Notify()
         {
             DateTime dateTime = DateTime.Today;
-            TimeSpan timeSpan = dateTime - value;
+           
             string Notify = string.Empty;
-            double left = timeSpan.TotalDays;
+         
 
-            List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.InputDay == value).ToList();
+            List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.RangeAlarm <= (int)((TimeSpan)(x.InputDay - dateTime)).TotalDays && x.Stage != TrangThai.DaGiao).ToList();
             foreach (DanhSachDonHang item in a)
             {
-                if (item.Stage != TrangThai.PO)
+                if (item.Stage != TrangThai.DaGiao)
                 {
-                    if (left > item.RangeAlarm)
+                    if ((int)(item.InputDay - dateTime).TotalDays > item.RangeAlarm)
                     {
                         item.Alarm = Alarm.Pending;
+                        Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {(int)(item.InputDay - dateTime).TotalDays} ngày" + Environment.NewLine;
                     }
-                    else if (left <= item.RangeAlarm)
+                    else if ((int)(item.InputDay - dateTime).TotalDays <= item.RangeAlarm)
                     {
-                        item.Alarm = Alarm.Late;
+                        if((int)(item.InputDay - dateTime).TotalDays > 0) 
+                        {
+                            item.Alarm = Alarm.Late;
+                            Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {(int)(item.InputDay - dateTime).TotalDays} ngày" + Environment.NewLine;
+                        }
+                        else
+                        {
+                            item.Alarm = Alarm.Late;
+                            Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Trễ hạn {(int)(item.InputDay - dateTime).TotalDays} ngày" + Environment.NewLine;
+                        }
                     }
                 }
                 else
@@ -338,13 +387,13 @@ namespace OrderManagerment_WPF.ViewModel
                     item.Alarm = Alarm.Done;
                 }
             }
-            foreach (DanhSachDonHang item in DanhSachDonHangs)
-            {
-                if (item.Alarm == Alarm.Late || item.Alarm == Alarm.Pending || item.Alarm == Alarm.Request)
-                {
-                    Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
-                }
-            }
+            //foreach (DanhSachDonHang item in DanhSachDonHangs)
+            //{
+            //    if (item.Alarm == Alarm.Late || item.Alarm == Alarm.Pending || item.Alarm == Alarm.Request)
+            //    {
+            //        Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
+            //    }
+            //}
             if (Notify != "") 
             {
                 App.NotifyIcon.ShowBalloonTip(10000, "Đơn hàng cần xử lý", Notify, System.Windows.Forms.ToolTipIcon.Warning);
@@ -380,7 +429,7 @@ namespace OrderManagerment_WPF.ViewModel
         {
             switch ((TrangThai)value)
             {
-                case TrangThai.Dagiao:
+                case TrangThai.DaGiao:
                     return Colors.Blue;
 
                 case TrangThai.PO:
@@ -405,7 +454,7 @@ namespace OrderManagerment_WPF.ViewModel
         {
             switch ((TrangThai)value)
             {
-                case TrangThai.Dagiao:
+                case TrangThai.DaGiao:
                     return "Đã Giao Hàng";
                 case TrangThai.PO:
                     return "Đã Có Po (Chờ Hàng Về)";
@@ -444,10 +493,10 @@ namespace OrderManagerment_WPF.ViewModel
         }
         public string Notify(DanhSachDonHang value)
         {
-            if(value.Stage!= TrangThai.Dagiao) 
+            if (value.Stage != TrangThai.DaGiao)
             {
                 DateTime dateTime = DateTime.Today;
-                TimeSpan timeSpan = dateTime - value.InputDay;
+                TimeSpan timeSpan = value.InputDay - dateTime;
                 double left = timeSpan.TotalDays;
                 return left >= 0 ? string.Format("Còn lại {0} ngày", left) : string.Format("Trễ {0} ngày", Math.Abs(left));
             }

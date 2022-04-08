@@ -19,6 +19,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
         public string FolderData { get; set; }
         public string LinkNas { get; set; }
         public List<string> DanhSachOrder { get; set; }
+        //public List<string> BangThongKe { get; set; }
     }
     
 }

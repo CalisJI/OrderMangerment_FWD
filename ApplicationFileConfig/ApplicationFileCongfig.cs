@@ -19,6 +19,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
         public static SystemConfig SystemConfig;
         public static bool ConnectServer = false;
         public static ObservableCollection<DanhSachDonHang> DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
+        //public static ObservableCollection<BangThongKe> BangThongKes = new ObservableCollection<BangThongKe>();
         #region File Initial
         public ApplicationFileCongfig()
         {
@@ -48,6 +49,12 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                             {
                                 DanhSachDonHang donHang = Get_Data<DanhSachDonHang>(item);
                                 DanhSachDonHangs.Add(donHang);
+                                //DanhSachDonHang danhSachDonHang = DanhSachDonHangs.First(x => x.IDOrder == Convert.ToInt32(item));
+                                //if (danhSachDonHang != null) 
+                                //{
+                                //    BangThongKe bangThongKe = Get_Data<BangThongKe>("TK" + item);
+                                //    BangThongKes.Add(bangThongKe);
+                                //}
                             }
                             Update_Data(SystemConfig);
                         }
@@ -58,6 +65,12 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
                             {
                                 DanhSachDonHang donHang = Get_Data<DanhSachDonHang>(item);
                                 DanhSachDonHangs.Add(donHang);
+                                //DanhSachDonHang danhSachDonHang = DanhSachDonHangs.First(x => x.IDOrder == Convert.ToInt32(item));
+                                //if (danhSachDonHang != null)
+                                //{
+                                //    BangThongKe bangThongKe = Get_Data<BangThongKe>("TK" + item);
+                                //    BangThongKes.Add(bangThongKe);
+                                //}
                             }
                         }
 

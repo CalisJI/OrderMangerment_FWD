@@ -20,6 +20,9 @@
             <DataTemplate DataType="{x:Type viewmodel:BangBaoGiaViewModel}">
                 <view:BangBaoGiaView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:BangThongKe_ViewModel}">
+                <view:BangThongKe_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
