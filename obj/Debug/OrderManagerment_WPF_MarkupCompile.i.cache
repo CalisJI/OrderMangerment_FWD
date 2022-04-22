@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\Cong_Viec\New folder\App.xaml
-6-1853556680
+8-5009693
 
-211163599476
+26848641700
 222111000055
-MainWindow.xaml;MainResource\MainResource.xaml;View\BangBaoGiaView.xaml;View\BangThongKe_View.xaml;View\DanhSachDonHang_View.xaml;View\MainView.xaml;
+MainWindow.xaml;MainResource\MainResource.xaml;View\BangBaoGiaView.xaml;View\BangThongKe_View.xaml;View\DanhSachDonHang_View.xaml;View\MainView.xaml;View\NhapLinkView.xaml;View\TinhToanView.xaml;
 
-False
+True
 

@@ -46,6 +46,26 @@ namespace OrderManagerment_WPF.ViewModel
             }
         }
 
+
+        private static ICollectionView _employeeCollection;
+
+        public ICollectionView EmployeeCollection
+        {
+            get { return _employeeCollection; }
+            set { SetProperty(ref _employeeCollection, value); }
+        }
+
+        public static string _employeeName = string.Empty;
+        public string EmployeeName
+        {
+            get { return _employeeName; }
+            set
+            {
+                SetProperty(ref _employeeName, value);
+                // EmployeeCollection.Refresh();
+            }
+        }
+
         #endregion
 
         #region Innitial
@@ -60,159 +80,19 @@ namespace OrderManagerment_WPF.ViewModel
         public ICommand ThongkeTable { get; set; }
         public ICommand ChiTietBangBaoGia { get; set; }
         public ICommand QuayVe { get; set; }
+        public ICommand Loaded { get; set; }
+        public ICommand Search { get; set; }
 
         #endregion
         #region Variable
-        private DispatcherTimer TimerNotify;
+        public static DispatcherTimer TimerNotify;
         private int indexnew = 0;
         public static DanhSachDonHang OrderSelected;
+        public static bool BoolTimer = false;
         private List<DanhSachDonHang> TempListOrder = new List<DanhSachDonHang>();
         public BangBaoGiaViewModel BangBaoGiaViewModel = BangBaoGiaViewModel.INS_BangBaoGiaViewModel;
         #endregion
-        public void GetData()
-        {
-            DanhSachDonHangs = new ObservableCollection<DanhSachDonHang>();
-            DanhSachDonHang danhSachDonHang1 = new DanhSachDonHang();
-            danhSachDonHang1.RangeAlarm = 3;
-            danhSachDonHang1.Customer = "aido";
-            danhSachDonHang1.InputDay = DateTime.Today;
-            danhSachDonHang1.Note = "note";
-            danhSachDonHang1.Stage = TrangThai.PO;
-            danhSachDonHang1.ProductDetails = new ObservableCollection<BangBaoGia>()
-            {
-               new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 1",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
 
-                },
-                new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 2",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
-
-                },
-                new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 3",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
-
-                }
-            };
-            DanhSachDonHang danhSachDonHang2 = new DanhSachDonHang();
-
-            danhSachDonHang2.Customer = "Nguoikahc";
-            danhSachDonHang2.RangeAlarm = 2;
-            danhSachDonHang2.InputDay = DateTime.Today;
-            danhSachDonHang2.Note = "Note";
-            danhSachDonHang2.Stage = TrangThai.DaGiao;
-            danhSachDonHang2.ProductDetails = new ObservableCollection<BangBaoGia>()
-            {
-               new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 1",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
-
-                },
-                new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 2",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
-
-                },
-                new BangBaoGia()
-                {
-                    ProductName = "ten1",
-                    Nguoimua = "người 3",
-                    Marker = "",
-                    Note="dd",
-                    But_Price_U = 198516,
-                    LeadTime_Buy = 2,
-                    LeadTime_Giao = 5,
-                    Link_Buy_Spare = "",
-                    Buy_Linking = "dffff",
-                    Quantity=5,
-                    STT = 1,
-                    Total=8555,
-                    Total_Price_B_P=555,
-                    Transport_Fee=551,
-                    Unit = "PCS"
-
-                }
-            };
-            DanhSachDonHangs.Add(danhSachDonHang1);
-            DanhSachDonHangs.Add(danhSachDonHang2);
-            List<DanhSachDonHang> a = DanhSachDonHangs.Where(x => x.IDOrder == 0).ToList();
-            foreach (DanhSachDonHang item in a)
-            {
-                item.IDOrder = DanhSachDonHangs.IndexOf(item) + 1;
-            }
-        }
 
         #region ViewModel
         DanhSachDonHang_ViewModel DanhSachDonHang_ViewModel = DanhSachDonHang_ViewModel.INS_DanhSachDonHangViewModel;
@@ -222,14 +102,21 @@ namespace OrderManagerment_WPF.ViewModel
         #endregion
         public MainViewModel()
         {
-            //GetData();
-            TimerNotify = new DispatcherTimer();
-            TimerNotify.Interval = new TimeSpan(0,30,0);
-            TimerNotify.Tick += TimerNotify_Tick;
-            TimerNotify.IsEnabled = true;
-            TimerNotify.Start();
+
             mainViewModel = this;
             mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+            Loaded = new RelayCommand<object>((p) => { return true; }, (p) =>
+             {
+                 TimerNotify = new DispatcherTimer();
+                 TimerNotify.Interval = new TimeSpan(0, 30, 0);
+                 TimerNotify.Tick += TimerNotify_Tick;
+                 TimerNotify.IsEnabled = true;
+                 TimerNotify.Start();
+                 EmployeeCollection = CollectionViewSource.GetDefaultView(DanhSachDonHangs);
+
+             });
+
+
             UpdateProperty = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 OnPropertyChanged(nameof(DanhSachDonHangs));
@@ -262,9 +149,10 @@ namespace OrderManagerment_WPF.ViewModel
                         Alarm = Alarm.Request,
                         BangThongKe = new BangThongKe()
                         {
-                            HQ = 500000
+
                         }
-                        
+
+
                     };
                     DanhSachDonHangs.Add(danhSachDonHang);
                     DanhSachDonHang a = DanhSachDonHangs.First(x => x.IDOrder == 0);
@@ -272,6 +160,7 @@ namespace OrderManagerment_WPF.ViewModel
                     a.IDOrder = max + 1;
                     indexnew = a.IDOrder;
                     EnableEdit = true;
+
                 }
                 catch (Exception)
                 {
@@ -281,6 +170,7 @@ namespace OrderManagerment_WPF.ViewModel
             });
             Save = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                new DanhSachDonHang();
                 try
                 {
                     EnableEdit = false;
@@ -305,9 +195,9 @@ namespace OrderManagerment_WPF.ViewModel
                         catch (Exception)
                         {
 
-                            
+
                         }
-                       
+
                     }
                     TempListOrder.Clear();
 
@@ -329,54 +219,130 @@ namespace OrderManagerment_WPF.ViewModel
                 {
                     if (EnableEdit)
                     {
-                        OrderSelected = (DanhSachDonHang)p;
-                        if (!TempListOrder.Contains((DanhSachDonHang)p))
+                        if (p != null)
                         {
-                            TempListOrder.Add((DanhSachDonHang)p);
+                            OrderSelected = (DanhSachDonHang)p;
+                           
+                            if (!TempListOrder.Contains((DanhSachDonHang)p))
+                            {
+                                TempListOrder.Add((DanhSachDonHang)p);
+                            }
                         }
+
                     }
                 }
                 catch (Exception)
                 {
 
-                   
+
                 }
-               
+
 
             });
-            ThongkeTable = new RelayCommand<object>((p) => { return true; }, (p) => 
+            ThongkeTable = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+
                 mainViewModel.SelectedViewModel = BangThongKe_ViewModel;
+            });
+
+            ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                BoolTimer = true;
+                TimerNotify.IsEnabled = false;
+                TimerNotify.Stop();
+
+                OrderSelected = (DanhSachDonHang)p;
+                if (OrderSelected != null)
+                {
+                    BangBaoGiaViewModel.Orderselect = OrderSelected;
+
+                    BangBaoGiaViewModel.EmployeeCollection = CollectionViewSource.GetDefaultView(BangBaoGiaViewModel.Orderselect.ProductDetails);
+                    // BangBaoGiaViewModel.EmployeeCollection.Filter = BangBaoGiaViewModel.Filter;
+
+
+                    if (BangBaoGiaViewModel.Orderselect.ProductDetails != null)
+                    {
+                        DateTime today = DateTime.Today;
+                        List<BangBaoGia> a = BangBaoGiaViewModel.Orderselect.ProductDetails.Where(x => x.NOTE == HienTrang.ChuaMua).ToList();
+                        foreach (var item in a)
+                        {
+                            if (item.LEADTIME_GIAO.Date > OrderSelected.InputDay.Date)
+                            {
+                                item._NOTE = "Quá Ngày?";
+                            }
+                            else
+                            {
+                                item._NOTE = "Còn " + (item.LEADTIME_GIAO.Date - today.Date).Days.ToString() + " Ngày";
+                            }
+
+
+                        }
+                        List<BangBaoGia> b = BangBaoGiaViewModel.Orderselect.ProductDetails.Where(x => x.NOTE == HienTrang.DangGiao).ToList();
+                        foreach (var item in b)
+                        {
+                            if ((item.LEADTIME_GIAO.Date - item.LEADTIME_MUA.Date).Days < 0)
+                            {
+                                item._NOTE = "Có Thể Gom Hàng Trễ " + (item.LEADTIME_MUA.Date - item.LEADTIME_GIAO.Date).Days.ToString() + " Ngày";
+                            }
+                            else if ((item.LEADTIME_MUA.Date - today.Date).Days < 0)
+                            {
+                                item._NOTE = "Bạn Đã Nhận Hàng Chưa";
+                            }
+                            else if ((item.LEADTIME_MUA.Date - today.Date).Days > 0)
+                            {
+                                item._NOTE = (item.LEADTIME_MUA.Date - today.Date).Days.ToString() + " Ngày Nữa Giao Đến";
+                            }
+                            else if ((item.LEADTIME_MUA.Date - today.Date).Days == 0)
+                            {
+                                item._NOTE = "Hôm Nay Nhớ Nhận Hàng";
+                            }
+
+                        }
+                    }
+                }
+
+                mainViewModel.SelectedViewModel = BangBaoGiaViewModel;
+
+
+            });
+            QuayVe = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+                TimerNotify.IsEnabled = true;
+                TimerNotify.Start();
+                if (BoolTimer == true)
+                {
+                    BangBaoGiaViewModel.TimerNotify1.IsEnabled = false;
+                    BangBaoGiaViewModel.TimerNotify1.Stop();
+                    BoolTimer = false;
+                }
+
+                mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
+
+            });
+            Search = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                EmployeeCollection.Filter = Filter;
+                EmployeeCollection.Refresh();
             });
         }
 
         private void TimerNotify_Tick(object sender, EventArgs e)
         {
             Notify();
-           ChiTietBangBaoGia = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                OrderSelected = (DanhSachDonHang)p;
-                mainViewModel.SelectedViewModel = BangBaoGiaViewModel;
-                //BangBaoGiaViewModel.Orderselect = (DanhSachDonHang)p;
 
-            });
-            QuayVe = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-                mainViewModel.SelectedViewModel = DanhSachDonHang_ViewModel;
-
-            });
 
         }
         #region Method
         public void Notify()
         {
             DateTime dateTime = DateTime.Today;
-           
+
             string Notify = string.Empty;
-         
+
 
             List<DanhSachDonHang> a = ApplicationFileCongfig.DanhSachDonHangs.Where(x => x.RangeAlarm <= (int)((TimeSpan)(x.InputDay - dateTime)).TotalDays && x.Stage != TrangThai.DaGiao).ToList();
+
             foreach (DanhSachDonHang item in a)
             {
                 if (item.Stage != TrangThai.DaGiao)
@@ -388,7 +354,7 @@ namespace OrderManagerment_WPF.ViewModel
                     }
                     else if ((int)(item.InputDay - dateTime).TotalDays <= item.RangeAlarm)
                     {
-                        if((int)(item.InputDay - dateTime).TotalDays > 0) 
+                        if ((int)(item.InputDay - dateTime).TotalDays > 0)
                         {
                             item.Alarm = Alarm.Late;
                             Notify += "Đơn Hàng" + item.IDOrder.ToString() + $" Hạn còn {(int)(item.InputDay - dateTime).TotalDays} ngày" + Environment.NewLine;
@@ -403,7 +369,7 @@ namespace OrderManagerment_WPF.ViewModel
                 else
                 {
                     item.Alarm = Alarm.Done;
-                    
+
                 }
             }
             //foreach (DanhSachDonHang item in DanhSachDonHangs)
@@ -413,12 +379,36 @@ namespace OrderManagerment_WPF.ViewModel
             //        Notify += "Đơn Hàng" + item.IDOrder.ToString()+ $" Hạn còn {left} ngày" + Environment.NewLine;
             //    }
             //}
-            if (Notify != "") 
+            if (Notify != "")
             {
                 App.NotifyIcon.ShowBalloonTip(10000, "Đơn hàng cần xử lý", Notify, System.Windows.Forms.ToolTipIcon.Warning);
             }
         }
         #endregion
+        public static bool Filter(object obj)
+        {
+            try
+            {
+                DanhSachDonHang ds = obj as DanhSachDonHang;
+                
+                if (!string.IsNullOrEmpty(_employeeName))
+                {
+                    return ds.Customer.Contains(_employeeName);
+                }
+                if (ds.Customer == null)
+                {
+                    ds.Customer = "";
+                }
+                return ds.Customer.Contains(_employeeName);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public void DeleteOrder(DanhSachDonHang danhSachDonHang)
         {
             try

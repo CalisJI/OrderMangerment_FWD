@@ -24,5 +24,11 @@ namespace OrderManagerment_WPF.View
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ListDonhang.UpdateLayout();
+            ListDonhang.Items.Refresh();
+        }
     }
 }

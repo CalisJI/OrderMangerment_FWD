@@ -4,38 +4,181 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrderManagerment_WPF.View"
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:enumlocal="clr-namespace:OrderManagerment_WPF.OrderObject"
+             xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
              mc:Ignorable="d" 
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+            
+             d:DesignHeight="1080" d:DesignWidth="1920" DataContext="{StaticResource BangBaoGia}" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <i:InvokeCommandAction Command="{Binding Loaded}" >
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded" >
+            <i:InvokeCommandAction Command="{Binding Unloaded}" ></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ColorConver:GridRowColor2 x:Key="GridSetColor1"/>
+        
+        <ObjectDataProvider x:Key="myEnum" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumlocal:HienTrang"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
+        <Grid Height="1080" Width="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"></RowDefinition>
+                <RowDefinition></RowDefinition>
 
-        </Grid.RowDefinitions>
-        <Button Content="Quay Lại" HorizontalAlignment="Left"
+            </Grid.RowDefinitions>
+            <Button Content="Quay Lại" HorizontalAlignment="Left"
                 Margin="0,4,0,5" Width="80" Padding="0"
                 DataContext="{StaticResource MainViewModel}"
                 Command="{Binding QuayVe}"
                 >
-            
-        </Button>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right"  Orientation="Horizontal" Margin="10,0,0,0">
-            <Button DataContext="{StaticResource BangBaoGia}"
+
+            </Button>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right"  Orientation="Horizontal" Margin="10,0,0,0">
+                <Button DataContext="{StaticResource BangBaoGia}"
+                Command="{Binding TinhToan}"
+            HorizontalAlignment="Right" Content="TinhToan" Padding="0"
+                Margin="10,4,0,5" Width="80" ></Button>
+                <Button DataContext="{StaticResource BangBaoGia}"
                 Command="{Binding Openfolder}"
             HorizontalAlignment="Right" Content="File" Padding="0"
                 Margin="10,4,0,5" Width="80" ></Button>
-            <Button 
-                
+                <Button 
+                DataContext="{StaticResource BangBaoGia}"
+               Command="{Binding NhapLink}"
+                Width="80" Content="LINK" Margin="10,0,0,0" ></Button>
+                <Button 
+                DataContext="{StaticResource BangBaoGia}"
+                Command="{Binding Edit}"
+            HorizontalAlignment="Right" Content="Chỉnh sữa" Padding="0"
+                Margin="10,4,0,5" Width="80"  ></Button>
+                <Button 
+                DataContext="{StaticResource BangBaoGia}"
+                Command="{Binding SaveChiTietBangBaoGia}"
             HorizontalAlignment="Right" Content="Lưu" Padding="0"
-                Margin="10,4,0,5" Width="80" ></Button>
-            
-        </StackPanel>
-        
-        <DataGrid DataContext="{StaticResource BangBaoGia}" Grid.Row="1"
-                  ItemsSource="{Binding Orderselect.ProductDetails }"
+                Margin="10,4,0,5" Width="80" Click="Button_Click" ></Button>
+
+            </StackPanel>
+        <Border Grid.Row="1" CornerRadius="20" Background="#FFB2B0A7">
+            <StackPanel HorizontalAlignment="Center" Grid.Row="1" >
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" >
+                    <TextBlock Text="Search : " Margin="5,0,0,0" Padding="0,10,0,0" FontSize="18" TextDecorations="{x:Null}" FontWeight="Bold" />
+                    <TextBox DataContext="{StaticResource BangBaoGia}" 
+                         Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}" Width="221" Name="textbox1" FontSize="18" Padding="0" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Margin="0"    >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding Search}" ></KeyBinding>
+                        </TextBox.InputBindings>
+
+                    </TextBox>
+                    <Button Content="Search" DataContext="{StaticResource BangBaoGia}" 
+                            Command="{Binding Search}"
+                            
+                            ></Button>
+                    
+                </StackPanel>
+                <DataGrid
+                IsReadOnly="{ Binding EnableEdit , Converter={StaticResource InvertBooleanConverter}}"
+                AutoGenerateColumns="False"
+                x:Name="DtGrid"
+                   
+                    
+                DataContext="{StaticResource BangBaoGia}"
+                ItemsSource="{Binding Orderselect.ProductDetails}"
+                  UseLayoutRounding="False" 
+                ScrollViewer.CanContentScroll="True" HeadersVisibility="Column" FontSize="18"  
+                SelectionMode="Single" IsManipulationEnabled="True"
+                    Height="985" VerticalScrollBarVisibility="Visible" 
+                    
+             
                   >
+                    <DataGrid.Columns >
+                        <DataGridTextColumn  Header="STT"  Binding="{Binding STT}"  />
+                        <DataGridTextColumn Header="Tên Sản Phẩm" Binding="{Binding PRODUCTNAME}" />
+
+                        <DataGridTextColumn Header="Mã Sản Phẩm" Binding="{Binding CODE_PRODUCTNAME}" />
+                        <DataGridTextColumn Header="Đơn Vị" Binding="{Binding UNIT}" />
+                        <DataGridTextColumn Header="Hãng Sản Xuất" Binding="{Binding MAKER}" />
+                        <DataGridTextColumn
+                        Header="Thời Gian Giao"  Foreground="#FFA20C80" Binding="{Binding LEADTIME_GIAO, StringFormat=MM/dd/yyyy}" FontWeight="Bold"
+                        ></DataGridTextColumn>
+
+                        <DataGridHyperlinkColumn  Header="Link" Binding="{Binding Path=BUYINGLINK}" 
+                                              ContentBinding="{Binding Path=ContentLink }"
+                                              IsReadOnly="True"  >
+                            <DataGridHyperlinkColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <EventSetter Event="Hyperlink.Click" Handler="LinkClick" ></EventSetter>
+                                </Style>
+                            </DataGridHyperlinkColumn.ElementStyle>
+                        </DataGridHyperlinkColumn>
+                        <DataGridTextColumn
+                        Header="Thời Gian Nhận" Foreground="#FFA20C80" Binding="{Binding LEADTIME_MUA, StringFormat=MM/dd/yyyy}" FontWeight="Bold"
+                        ></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Tình Trạng" ItemsSource="{Binding Source={StaticResource myEnum}}" 
+                                            SelectedItemBinding="{Binding NOTE}"/>
+
+                        <DataGridTextColumn Header="Ghi Chú" Binding="{Binding _NOTE}" Foreground="Red"   />
+                        <DataGridTextColumn Header="Báo Trước (ngày)" Binding="{Binding BaoTruocXngay}"  ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Người Mua" Binding="{Binding NGUOI_MUA}" />
+                    </DataGrid.Columns>
+
+                    <DataGrid.RowStyle >
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{Binding NOTE, Converter={StaticResource GridSetColor1}}"/>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Style>
+
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin"  Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridCell">
+                                        <Border Background="Black" BorderThickness="0">
+                                            <Border x:Name="border"
+                                                    BorderBrush="White"
+                                                    BorderThickness="3"
+                                                    Background="White"
+                                                    CornerRadius="0.5">
+                                                <ContentPresenter/>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsSelected}" Value="true">
+                                                <Setter TargetName="border" Property="DocumentViewerBase.Background" Value="#FFB2B0A7"/>
+                                            </DataTrigger>
+
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
+
+
+            </StackPanel>
+        </Border>
             
-        </DataGrid>
-    </Grid>
+
+        </Grid>
+    
+    
 </UserControl>

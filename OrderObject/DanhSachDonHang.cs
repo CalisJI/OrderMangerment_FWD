@@ -17,9 +17,17 @@ namespace OrderManagerment_WPF.OrderObject
         public DateTime InputDay { get; set; }
         public TrangThai Stage { get; set; }
         public Alarm Alarm { get; set; }
-        public ObservableCollection<BangBaoGia> ProductDetails { get; set; }
+        public double TongGiaMua { get; set; }
+        public double TongGiaBan { get; set; }
+        public double TongPhiShip { get; set; }
+        public double VAT { get; set; }
+        public double PHANTRAM { get; set; }
+        public double VANCHUYEN { get; set; }
+        public double HQ { get; set; }
+        public  ObservableCollection<BangBaoGia> ProductDetails { get; set; }
+       
         // Phan Thống Kê
-        public BangThongKe BangThongKe { get; set; }
+        public BangThongKe  BangThongKe { get; set; }
     }
     public enum TrangThai 
     {

@@ -8,219 +8,264 @@
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource BangThongKe}"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodel="clr-namespace:OrderManagerment_WPF.ViewModel" 
-             d:DesignHeight="1000" d:DesignWidth="1920">
-    <Viewbox>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.15*"/>
-            </Grid.ColumnDefinitions>
-            <DataGrid 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <i:InvokeCommandAction
+                Command="{Binding Load}" >
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+   
+        <Grid Width="1920" Height="1080">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        <Border Grid.Row="1" CornerRadius="20" 
+                Background="#FFB2B0A7">
+            <StackPanel Margin="20">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Search : " Margin="0,0,0,0" Padding="0,10,0,0" FontSize="18" TextDecorations="{x:Null}" FontWeight="Bold" />
+                    <TextBox DataContext="{StaticResource BangThongKe}" 
+                         Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}" Width="221" Name="textbox1" FontSize="18" Padding="0" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Margin="0"    >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding Search}" ></KeyBinding>
+                        </TextBox.InputBindings>
+
+                    </TextBox>
+                    <Button Content="Search" DataContext="{StaticResource BangThongKe}" 
+                            Command="{Binding Search}"
+                            
+                            ></Button>
+                    
+                </StackPanel>
+                <DataGrid Grid.Row="1"
                 IsReadOnly="{Binding Editable, Converter={StaticResource InvertBooleanConverter}}"
                    x:Name="ListDonhang"
                 SelectionMode="Single"
-                Height="1000"
-                Width="1650"
-                HorizontalAlignment="Left"
+                
+                HorizontalAlignment="Center"
                 AutoGenerateColumns="False"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                ItemsSource="{Binding DanhSachDons}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction 
+                ItemsSource="{Binding PhanThongKe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                          Height="969" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
                             Command="{Binding ItemDetermine}"
                             CommandParameter="{Binding ElementName=ListDonhang, Path=SelectedItem}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <DataGrid.Columns>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
 
-                    <DataGridTextColumn
-                        Binding="{Binding IDOrder}"
+                        <DataGridTextColumn
+                        Binding="{Binding BangThongKe.STT }"
                      
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="STT"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Binding="{Binding Customer}"
-                     
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                        Binding="{Binding BangThongKe.KhachHang }"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="Tên Khách Hàng"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Binding="{Binding ProductDetails}"
-                        FontWeight="DemiBold"
-                        FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
-                                FontSize="25"
-                                FontWeight="DemiBold"
-                                Text="PO"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                                Text="Khách Hàng"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn
                        
                        Binding="{Binding BangThongKe.NguoiBan}"
                         
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Người Bán"/>
 
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
+                        </DataGridTextColumn>
 
-                    <DataGridTextColumn
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.PhiBH}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="Phí BH"/>
-                        </DataGridTextColumn.Header>
+                                Text="Phí BH (%)"/>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.GiaMua}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Giá Mua"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.GiaBan}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Giá Bán"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.LoiNhuan_Rong}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="Lợi nhuận(sau VAT, HQ, V-C)"/>
-                        </DataGridTextColumn.Header>
+                                Text="Lợi Nhuận(sau VAT, HQ, V-C)"/>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.LN_Per_GiaBan}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="%LN/Giá Bán"/>
-                        </DataGridTextColumn.Header>
+                                Text="LN/Giá Bán (%)"/>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.VanChuyen}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Phí Vận Chuyển"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.HQ}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="HQ"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.PhiShipMuaHang}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="Phí Ship Mua Hàng"/>
-                        </DataGridTextColumn.Header>
+                                Text="Phí Ship Hàng"/>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                       Binding="{Binding BangThongKe.NoteThongke}"
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                       Binding="{Binding BangThongKe.Note}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Ghi Chú"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding BangThongKe.Percent_Increase}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
-                                Text="%Tăng Giá"/>
-                        </DataGridTextColumn.Header>
+                                Text="Tăng Giá (%)"/>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
 
-                <!--<DataGrid.RowStyle >
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="{Binding Stage, Converter={StaticResource GridSetColor}}"/>
-                        </Setter.Value>
-                    </Setter>
+                    <DataGrid.RowStyle >
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush  Color="Blue" />
+                                </Setter.Value>
+                            </Setter>
 
-                </Style>
+                        </Style>
 
-            </DataGrid.RowStyle>-->
+                    </DataGrid.RowStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin"  Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridCell">
+                                        <Border Background="Black" BorderThickness="0">
+                                            <Border x:Name="border"
+                                                    BorderBrush="White"
+                                                    BorderThickness="3"
+                                                    Background="White"
+                                                    CornerRadius="0.5">
+                                                <ContentPresenter/>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsSelected}" Value="true">
+                                                <Setter TargetName="border" Property="DocumentViewerBase.Background" Value="Orange"/>
+                                            </DataTrigger>
 
-            </DataGrid>
-            <StackPanel Grid.Column="1">
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
+
+            </StackPanel>
+             
+        </Border>
+           
+            <StackPanel HorizontalAlignment="Right"  Orientation="Horizontal" Grid.Row="0">
 
                 <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -239,8 +284,21 @@
                     IsEnabled="{Binding Editable}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                     Content="Lưu "/>
+                <Button 
+                    Width="150"
+                    Margin="10,10,0,10"
+                    Content="Chi Tiết Đơn Hàng" DataContext="{StaticResource MainViewModel}" 
+                        Command="{Binding ChiTietBangBaoGia}" 
+                        CommandParameter="{Binding ElementName=ListDonhang, Path=SelectedItem}"
+                        ></Button>
+
             </StackPanel>
+            <Button HorizontalAlignment="Left" Content="Trở về" DataContext="{StaticResource MainViewModel}"
+                Command="{Binding QuayVe}"
+                ></Button>
         </Grid>
-    </Viewbox>
+   
+      
+    
     
 </UserControl>

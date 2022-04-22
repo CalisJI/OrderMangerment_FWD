@@ -6,4 +6,6 @@
     <viewmodels:DanhSachDonHang_ViewModel x:Key="Danhsachdonhang"/>
     <viewmodels:BangBaoGiaViewModel x:Key="BangBaoGia"/>
     <viewmodels:BangThongKe_ViewModel x:Key="BangThongKe"/>
+    <viewmodels:NhapLinkViewModel x:Key="NhapLink" ></viewmodels:NhapLinkViewModel>
+    <viewmodels:TinhToanViewModel x:Key="TinhToan" ></viewmodels:TinhToanViewModel>
 </ResourceDictionary>

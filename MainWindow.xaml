@@ -9,11 +9,14 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid DataContext="{StaticResource MainViewModel}">
-        <ContentControl Content="{Binding SelectedViewModel}">
+        Title="MainWindow" Height="1080" Width="1920">
+    <Viewbox Margin="0,0,-4,-4">
+        <Grid Height="1053" Width="1920" DataContext="{StaticResource MainViewModel}">
+            <ContentControl Content="{Binding SelectedViewModel}">
 
-        </ContentControl>
-       
-    </Grid>
+            </ContentControl>
+
+        </Grid>
+    </Viewbox>
+
 </Window>

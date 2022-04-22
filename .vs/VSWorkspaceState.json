@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\ApplicationFileConfig",
+    "\\OrderObject",
     "\\View",
     "\\ViewModel"
   ],
-  "SelectedNode": "\\View\\BangBaoGiaView.xaml",
+  "SelectedNode": "\\ApplicationFileConfig\\ApplicationFileCongfig.cs",
   "PreviewInSolutionExplorer": false
 }

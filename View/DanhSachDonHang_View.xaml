@@ -12,7 +12,7 @@
              xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:AlarmToStrong="clr-namespace:OrderManagerment_WPF.ViewModel"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
-             d:DesignHeight="1000" d:DesignWidth="1920">
+             d:DesignHeight="1080" d:DesignWidth="1920" DataContext="{StaticResource MainViewModel}">
     <UserControl.Resources>
         <ColorConver:GridRowColor x:Key="GridSetColor"/>
         <EnumConvert:EnumToString x:Key="EnumToString"/>
@@ -35,175 +35,206 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Viewbox>
-        <Grid Width="1920"
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <i:InvokeCommandAction Command="{Binding Loaded}" >
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded" >
+            <i:InvokeCommandAction Command="{Binding Unloaded}" ></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
+    <Grid Width="1920" Height="1080"
             DataContext="{StaticResource MainViewModel}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.15*"/>
-            </Grid.ColumnDefinitions>
-            <DataGrid 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.08*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" CornerRadius="20" Background="#FFB2B0A7">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Search : " Margin="20,0,0,0" Padding="0,10,0,0" FontSize="18" TextDecorations="{x:Null}" FontWeight="Bold" />
+                    <TextBox DataContext="{StaticResource MainViewModel}" 
+                         Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}" Width="221" Name="textbox1" FontSize="18" Padding="0" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Margin="0"    >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding Search}" ></KeyBinding>
+                        </TextBox.InputBindings>
+
+                    </TextBox>
+                    <Button Content="Search" DataContext="{StaticResource MainViewModel}" 
+                            Command="{Binding Search}"
+                            
+                            ></Button>
+                </StackPanel>
+                <DataGrid Margin="20,20,0,20" Grid.Row="1"
                 IsReadOnly="{Binding EnableEdit, Converter={StaticResource InvertBooleanConverter}}"
                 x:Name="ListDonhang"
                 SelectionMode="Single"
-                Height="1000"
-                Width="1650"
-                HorizontalAlignment="Left"
+               HorizontalAlignment="Left"
+               
                 AutoGenerateColumns="False"
                 
-                ItemsSource="{Binding DanhSachDonHangs}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction 
+                ItemsSource="{Binding DanhSachDonHangs}" FontSize="18" Width="1880" Height="926">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
                             Command="{Binding ItemDetermine}"
                             CommandParameter="{Binding ElementName=ListDonhang, Path=SelectedItem}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <DataGrid.Columns>
-                    
-                    <DataGridTextColumn
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn
                         Binding="{Binding IDOrder}"
                      
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="STT"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                         Binding="{Binding Customer}"
                      
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Tên Khách Hàng"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        Binding="{Binding Note}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Đơn Hàng"/>
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                        
-                       Binding="{Binding InputDay, StringFormat=dd/MM/yyyy}"
+                       Binding="{Binding InputDay, StringFormat=MM/dd/yyyy}"
                         
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Ngày Yêu Cầu"/>
-                            
-                        </DataGridTextColumn.Header>
-                       
-                    </DataGridTextColumn>
-                    <DataGridComboBoxColumn
+
+                            </DataGridTextColumn.Header>
+
+                        </DataGridTextColumn>
+                        <DataGridComboBoxColumn
                         
                         SelectedItemBinding="{Binding Stage}"
                         ItemsSource="{Binding Source={StaticResource myEnum}}">
-                        <DataGridComboBoxColumn.Header>
-                            <TextBlock
+                            <DataGridComboBoxColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Trạng Thái"/>
-                        </DataGridComboBoxColumn.Header>
-                        
-                    </DataGridComboBoxColumn>
-                    <DataGridTextColumn
+                            </DataGridComboBoxColumn.Header>
+
+                        </DataGridComboBoxColumn>
+                        <DataGridTextColumn
                        Binding="{Binding IDOrder, Converter={StaticResource AlarmToString}}"
                         FontWeight="DemiBold"
                         FontSize="20">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
+                            <DataGridTextColumn.Header>
+                                <TextBlock
                                 FontSize="25"
                                 FontWeight="DemiBold"
                                 Text="Deadline"/>
-                        </DataGridTextColumn.Header>
+                            </DataGridTextColumn.Header>
 
-                    </DataGridTextColumn>
-                     
-                </DataGrid.Columns>
+                        </DataGridTextColumn>
 
-                <DataGrid.RowStyle >
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="{Binding Stage, Converter={StaticResource GridSetColor}}"/>
-                            </Setter.Value>
-                        </Setter>
+                    </DataGrid.Columns>
 
-                    </Style>
+                    <DataGrid.RowStyle >
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{Binding Stage, Converter={StaticResource GridSetColor}}"/>
+                                </Setter.Value>
+                            </Setter>
 
-                </DataGrid.RowStyle>
+                        </Style>
 
-            </DataGrid>
-            <StackPanel Grid.Column="1">
-                <Button
+                    </DataGrid.RowStyle>
+
+                </DataGrid>
+            </StackPanel>
+
+        </Border>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="0">
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"
-                    Margin="10"
+                    Margin="0,0,10,0"
                     Command="{Binding AddOrder}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Thêm Đơn Hàng"/>
-                <Button
+                    Content="Thêm Đơn Hàng" Height="60" Width="150"/>
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     DataContext="{StaticResource MainViewModel}"
                     Command="{Binding ChiTietBangBaoGia}"
                     CommandParameter="{ Binding ElementName=ListDonhang, Path=SelectedItem}"
-                    Width="150"
                     Margin="10"
+                    Height="60"
                     
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Chi Tiết Đơn Hàng"/>
-                <Button
+                    Content="Chi Tiết Đơn Hàng" Width="150"/>
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"
                     Margin="10"
+                    Height="60"
                     Command="{Binding ThongkeTable}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Bảng Thống Kê"/>
-                <Button
+                    Content="Bảng Thống Kê" Width="150"/>
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"
                     Margin="10"
+                    Height="60"
                     Command="{Binding DeleteDonHang}"
                     CommandParameter="{Binding ElementName=ListDonhang ,Path=SelectedItem}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Xóa Đơn Hàng"/>
-                <Button
+                    Content="Xóa Đơn Hàng" Width="150"/>
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"
                     Margin="10"
+                    Height="60"
                     Command="{Binding Edit}"
                     IsEnabled="{Binding EnableEdit, Converter={StaticResource InvertBooleanConverter}}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Chỉnh sửa "/>
-                <Button
+                    Content="Chỉnh sửa " Width="150"/>
+            <Button
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"
                     Margin="10"
+                    Height="60"
                     Command="{Binding Save}"
                     IsEnabled="{Binding EnableEdit}"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                    Content="Lưu "/>
-            </StackPanel>
-           
-           
-        </Grid>
-    </Viewbox>
-    
+                    Content="Lưu " Width="150" Click="Button_Click"/>
+
+        </StackPanel>
+
+
+    </Grid>
+
+
 </UserControl>

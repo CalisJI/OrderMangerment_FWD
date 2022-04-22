@@ -10,21 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OrderManagerment_WPF.View
 {
     /// <summary>
-    /// Interaction logic for BangThongKe_View.xaml
+    /// Interaction logic for TinhToanView.xaml
     /// </summary>
-    public partial class BangThongKe_View : UserControl
+    public partial class TinhToanView : Window
     {
-        public BangThongKe_View()
+        public TinhToanView()
         {
             InitializeComponent();
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+            datagrid1.UpdateLayout();
+            datagrid1.Items.Refresh();
+        }
     }
 }

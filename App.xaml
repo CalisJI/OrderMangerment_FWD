@@ -23,6 +23,12 @@
             <DataTemplate DataType="{x:Type viewmodel:BangThongKe_ViewModel}">
                 <view:BangThongKe_View/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:NhapLinkViewModel}">
+                <view:NhapLinkView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:TinhToanViewModel}">
+                <view:TinhToanView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

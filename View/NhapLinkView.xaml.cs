@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OrderManagerment_WPF.View
 {
     /// <summary>
-    /// Interaction logic for BangThongKe_View.xaml
+    /// Interaction logic for NhapLinkView.xaml
     /// </summary>
-    public partial class BangThongKe_View : UserControl
+    public partial class NhapLinkView : Window
     {
-        public BangThongKe_View()
+        public NhapLinkView()
         {
             InitializeComponent();
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace OrderManagerment_WPF.ApplicationFileConfig
         {
             OutputExcelPath = "";
             FolderData = "";
-            LinkNas = @"\\192.168.2.174\CloudFWD";
+            LinkNas = @"\\192.168.1.16\CloudFWD";
             DanhSachOrder = new List<string>();
         }
         public string OutputExcelPath { get; set; }

@@ -1,0 +1,179 @@
+﻿<Window x:Class="OrderManagerment_WPF.View.TinhToanView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrderManagerment_WPF.View"
+        
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
+          xmlns:enumlocal="clr-namespace:OrderManagerment_WPF.OrderObject"
+             xmlns:ColorConver="clr-namespace:OrderManagerment_WPF.ViewModel"
+        mc:Ignorable="d"
+       WindowStartupLocation="CenterScreen"
+        Title="TinhToanView" Height="700" Width="1200">
+    <Window.Resources>
+        <ColorConver:GridRowColor2 x:Key="GridSetColor1"/>
+        <ObjectDataProvider x:Key="myEnum" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumlocal:HienTrang"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Viewbox Height="700" Margin="0,0,0,-31">
+        <Grid Height="700" Width="1195">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" HorizontalAlignment="Left" Width="1196" Margin="0,0,0,30" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="1" CornerRadius="20" Background="#FFB2B0A7">
+                    <StackPanel HorizontalAlignment="Center" >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="Search : " Margin="5,0,0,0" Padding="0,10,0,0" FontSize="18" TextDecorations="{x:Null}" FontWeight="Bold" />
+                            <TextBox DataContext="{StaticResource BangBaoGia}" 
+                         Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}" Width="221" Name="textbox1" FontSize="18" Padding="0" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Margin="0"    >
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Enter" Command="{Binding Search}" ></KeyBinding>
+                                </TextBox.InputBindings>
+                                
+
+                            </TextBox>
+                            <Button Content="Search" DataContext="{StaticResource BangBaoGia}" 
+                            Command="{Binding Search}"
+                            
+                            ></Button>
+                        </StackPanel>
+                        <DataGrid
+                Name="datagrid1"
+                    HorizontalAlignment="Center"
+            DataContext="{StaticResource BangBaoGia}"
+            ItemsSource="{Binding Orderselect.ProductDetails}"
+            AutoGenerateColumns="False" FontSize="16" Margin="0,10" Height="559" 
+            >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="STT" Binding="{Binding STT}"/>
+                                <DataGridTextColumn Header="TÊN ĐƠN HÀNG" Binding="{Binding PRODUCTNAME}"  ></DataGridTextColumn>
+                                <DataGridTextColumn Header="SỐ LƯỢNG" Binding="{Binding QUANTITY}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GIÁ MUA / 1SP " Binding="{Binding BUY_PRICE_U}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="GIÁ MUA / XSP" IsReadOnly="True" Binding="{Binding TOTAL_B_P}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="PHÍ SHIP" Binding="{Binding TRANSPORT_FEE}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="TỔNG GIÁ MUA/XSP" IsReadOnly="True" Binding="{Binding TOTAL}" ></DataGridTextColumn>
+
+                            </DataGrid.Columns>
+
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin"  Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <Border Background="Black" BorderThickness="0">
+                                                    <Border x:Name="border"
+                                                    BorderBrush="White"
+                                                    BorderThickness="3"
+                                                    Background="White"
+                                                    CornerRadius="0.5">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsSelected}" Value="true">
+                                                        <Setter TargetName="border" Property="DocumentViewerBase.Background" Value="Orange"/>
+                                                    </DataTrigger>
+
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                        </DataGrid>
+                        
+                    </StackPanel>
+                    
+                </Border>
+                   
+
+
+
+            </Grid>
+
+            <Grid Grid.Row="0" Margin="0,0,4,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="2" HorizontalAlignment="Right" DataContext="{StaticResource BangBaoGia}" Width="85"  Content="Lưu" 
+                     Command="{Binding LuuTinhToan}" Click="Button_Click" Margin="0,16"
+                     ></Button>
+                <Button  Grid.Column="0" Content="Quay Về" HorizontalAlignment="Left" ></Button>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" >
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <TextBlock Text="Tổng Giá Mua" Margin="0,0,0,0" Background="#FF87F700" Width="100" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" />
+                            <TextBlock Text="Tổng Giá Bán" Margin="20,0,0,0" Background="#FF87F700" Width="100" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" />
+                            <TextBlock Text="Tổng Phí Ship" Margin="20,0,0,0" Background="#FF87F700" Width="100" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel DataContext="{StaticResource BangBaoGia}"  HorizontalAlignment="Center" 
+                            Orientation="Horizontal" Margin="0,10,0,0" >
+                            <TextBox  Name="tex1Giamua" 
+                              Text="{Binding TongGiaMua, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100" Margin="0,0,0,0" FontSize="16" TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                            <TextBox Name="tex2Giaban" 
+                             Text="{Binding TongGiaBan, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="100" Margin="20,0,0,0" FontSize="16" TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                            <TextBox Name="tex2Phiship" 
+                             Text="{Binding TongPhiShip, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="100" Margin="20,0,0,0" FontSize="16" TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Margin="50,0,0,0" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <TextBlock Text="VAT" Margin="0,0,0,0" Background="#FF87F700" Width="100" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" />
+                            <TextBlock Text="%" Margin="20,0,0,0" Background="#FF87F700" Width="100" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" />
+                            <TextBlock Text="Vận Chuyển" Margin="20,0,0,0"
+                               Background="#FF87F700" 
+                               Width="100" VerticalAlignment="Center"
+                               FontSize="16" TextAlignment="Center" />
+                            <TextBlock Text="HQ" Margin="20,0,0,0"
+                               Background="#FF87F700" 
+                               Width="100" VerticalAlignment="Center"
+                               FontSize="16" TextAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel DataContext="{StaticResource BangBaoGia}" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,10,0,0" >
+                            <TextBox  
+                              Text="{Binding VAT,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               Width="100" Margin="0,0,0,0" 
+                              FontSize="16" 
+                              TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                            <TextBox  
+                        Text="{Binding Phantram}"
+                               Width="100" Margin="20,0,0,0" FontSize="16" TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                            <TextBox  
+                        Text="{Binding Vanchuyen}"
+                               Width="100" Margin="20,0,0,0" FontSize="16" TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                            <TextBox  
+                        Text="{Binding HQ}"
+                               Width="100" 
+                        Margin="20,0,0,0" FontSize="16" 
+                        TextAlignment="Center" Foreground="Black" Background="#FF87F700" ></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+
+
+            </Grid>
+
+
+        </Grid>
+    </Viewbox>
+
+</Window>

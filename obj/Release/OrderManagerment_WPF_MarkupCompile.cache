@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Cong_Viec\New folder\obj\Release\
+f:\cong_viec\new folder\obj\Release\
 OrderManagerment_WPF
 none
 false
 TRACE
-F:\Cong_Viec\New folder\App.xaml
-5764501856
+f:\cong_viec\new folder\App.xaml
+8-5009693
 
-17182404756
-222111000055
-MainWindow.xaml;MainResource\MainResource.xaml;View\BangBaoGiaView.xaml;View\DanhSachDonHang_View.xaml;View\MainView.xaml;
+251603211484
+22-967046784
+MainWindow.xaml;MainResource\MainResource.xaml;View\BangBaoGiaView.xaml;View\BangThongKe_View.xaml;View\DanhSachDonHang_View.xaml;View\MainView.xaml;View\NhapLinkView.xaml;View\TinhToanView.xaml;
 
 True
 
